@@ -23,8 +23,7 @@ import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { loadVisitedParks, saveVisitedPark, deleteVisitedPark } from "../visitedParks";
-import { useUser } from "@supabase/auth-helpers-react";
-
+import { useSupabaseAuth } from "../useSupabaseAuth";
 
 // ---------------------------------------------------------
 // ICONS
@@ -107,7 +106,7 @@ export default function MapView() {
   // NEW: Supabase cloud‑synced visited parks
   const [visitedParks, setVisitedParks] = useState(new Set());
 
-  const { user } = useUser();   //  MUST come before any function that uses `user`
+  const { user, supabase } = useSupabaseAuth();   //  MUST come before any function that uses `user`
 
 // NEW: Load visited parks from Supabase
 useEffect(() => {
@@ -127,31 +126,63 @@ useEffect(() => {
 }, [user]);
 
 
-  // ---------------------------------------------------------
-  // LOAD PARKS (Trails coming soon) — REVISED
-  // ---------------------------------------------------------
+// ---------------------------------------------------------
+// LOAD PARKS (Trails coming soon) — REVISED
+// ---------------------------------------------------------
 
-  useEffect(() => {
-    loadParks().then((merged) => {
-      setParkData(merged);
-    });
-  }, []);
+useEffect(() => {
+  loadParks().then((merged) => {
+    setParkData(merged);
+  });
+}, []);
 
-  //  INSERT THE CLICK HANDLER RIGHT HERE
-  async function handleParkClick(parkId) {
-    if (!user) return;
+// INSERT THE CLICK HANDLER RIGHT HERE
+async function handleParkClick(parkId) {
+  if (!user) return;
 
-    await saveVisitedPark(user.id, parkId);
+  // Save visit to Supabase with today's date
+  const today = new Date().toISOString();
+  await saveVisitedPark(supabase, user.id, parkId, today);
 
-    setVisitedParks(prev => new Set([...prev, parkId]));
-  }   //  You were missing this closing brace
+  // Update icon state
+  setVisitedParks(prev => new Set([...prev, parkId]));
 
-  
-  //////////BLOCK2//////////
+  // Update your existing UI logic
+  setVisited(prev => ({ ...prev, [parkId]: true }));
+  setVisitedDates(prev => ({ ...prev, [parkId]: today }));
+}
 
-  // ---------------------------------------------------------
-  // FEATURE EDITING
-  // ---------------------------------------------------------
+async function handleUnvisit(parkId) {
+  if (!user) return;
+
+  // Delete from Supabase
+  await deleteVisitedPark(supabase, user.id, parkId);
+
+  // Update icon state
+  setVisitedParks(prev => {
+    const updated = new Set(prev);
+    updated.delete(parkId);
+    return updated;
+  });
+
+  // Update your existing UI logic
+  setVisited(prev => {
+    const updated = { ...prev };
+    delete updated[parkId];
+    return updated;
+  });
+
+  setVisitedDates(prev => {
+    const updated = { ...prev };
+    delete updated[parkId];
+    return updated;
+  });
+}
+//////////BLOCK2//////////
+
+// ---------------------------------------------------------
+// FEATURE EDITING
+// ---------------------------------------------------------
 
   const addFeature = (id, feature) => {
     if (!feature.trim()) return;
