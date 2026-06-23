@@ -107,15 +107,24 @@ export default function MapView() {
   // NEW: Supabase cloud‑synced visited parks
   const [visitedParks, setVisitedParks] = useState(new Set());
 
-  // NEW: Load visited parks from Supabase
-  useEffect(() => {
-    async function init() {
-      if (!user) return;
-      const visited = await loadVisitedParks(user.id);
-      setVisitedParks(visited);
-    }
-    init();
-  }, [user]);
+  const { user } = useUser();   //  MUST come before any function that uses `user`
+
+// NEW: Load visited parks from Supabase
+useEffect(() => {
+  async function init() {
+    if (!user) return;
+
+    const { visitedSet, visitedDatesMap } = await loadVisitedParks(user.id);
+
+    // For marker icons
+    setVisitedParks(visitedSet);
+
+    // For your existing UI logic (modals, filters, dates)
+    setVisited(visitedDatesMap);
+    setVisitedDates(visitedDatesMap);
+  }
+  init();
+}, [user]);
 
 
   // ---------------------------------------------------------
