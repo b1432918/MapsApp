@@ -19,12 +19,9 @@ async function loadParks() {
 
 //////////BLOCK1//////////
 
-
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import { loadVisitedParks, saveVisitedPark } from "../visitedParks"
-
 
 // ---------------------------------------------------------
 // ICONS
@@ -104,20 +101,6 @@ export default function MapView() {
   const [featureDeleteParkId, setFeatureDeleteParkId] = useState(null);
   const [featureDeleteSelection, setFeatureDeleteSelection] = useState([]);
 
-  // NEW: Supabase cloud‑synced visited parks
-  const [visitedParks, setVisitedParks] = useState(new Set());
-
-  // NEW: Load visited parks from Supabase
-  useEffect(() => {
-    async function init() {
-      if (!user) return;
-      const visited = await loadVisitedParks(user.id);
-      setVisitedParks(visited);
-    }
-    init();
-  }, [user]);
-
-
   // ---------------------------------------------------------
   // LOAD PARKS (Trails coming soon) — REVISED
   // ---------------------------------------------------------
@@ -128,17 +111,7 @@ export default function MapView() {
     });
   }, []);
 
-  //  INSERT THE CLICK HANDLER RIGHT HERE
-  async function handleParkClick(parkId) {
-    if (!user) return;
-
-    await saveVisitedPark(user.id, parkId);
-
-    setVisitedParks(prev => new Set([...prev, parkId]));
-  }   //  You were missing this closing brace
-
-  
-  //////////BLOCK2//////////
+//////////BLOCK2//////////
 
   // ---------------------------------------------------------
   // FEATURE EDITING
@@ -181,62 +154,61 @@ export default function MapView() {
     setFeatureDeleteSelection([]);
   };
 
-// ---------------------------------------------------------
-// VISIT / UNVISIT LOGIC
-// ---------------------------------------------------------
+  // ---------------------------------------------------------
+  // VISIT / UNVISIT LOGIC
+  // ---------------------------------------------------------
 
-const requestVisitDate = (id) => {
-  setVisitModalParkId(id);
-  setVisitModalDate("");
-  setVisitModalOpen(true);
-};
+  const requestVisitDate = (id) => {
+    setVisitModalParkId(id);
+    setVisitModalDate("");
+    setVisitModalOpen(true);
+  };
 
-const confirmVisit = async () => {   // MUST be async
-  if (!visitModalDate) return;
+  const confirmVisit = () => {
+    if (!visitModalDate) return;
 
-  const id = visitModalParkId;
+    const id = visitModalParkId;
 
-  const updatedVisited = { ...visited, [id]: true };
-  const updatedDates = { ...visitedDates, [id]: visitModalDate };
+    const updatedVisited = { ...visited, [id]: true };
+    const updatedDates = { ...visitedDates, [id]: visitModalDate };
 
-  setVisited(updatedVisited);
-  setVisitedDates(updatedDates);
+    setVisited(updatedVisited);
+    setVisitedDates(updatedDates);
 
-  // NEW: save online instead of localStorage
-  await saveVisitedPark(user.id, id, visitModalDate);
+    localStorage.setItem("visitedParks", JSON.stringify(updatedVisited));
+    localStorage.setItem("visitedDates", JSON.stringify(updatedDates));
 
-  setVisitModalOpen(false);
-  setVisitModalParkId(null);
-  setVisitModalDate("");
-};
+    setVisitModalOpen(false);
+    setVisitModalParkId(null);
+    setVisitModalDate("");
+  };
 
-const requestUnvisitConfirmation1 = (id) => {
-  setUnvisitModalParkId(id);
-  setUnvisitModalOpen1(true);
-};
+  const requestUnvisitConfirmation1 = (id) => {
+    setUnvisitModalParkId(id);
+    setUnvisitModalOpen1(true);
+  };
 
-const proceedToSecondUnvisitModal = () => {
-  setUnvisitModalOpen1(false);
-  setUnvisitModalOpen2(true);
-};
+  const proceedToSecondUnvisitModal = () => {
+    setUnvisitModalOpen1(false);
+    setUnvisitModalOpen2(true);
+  };
 
-const confirmUnvisit = async () => {   // MUST be async
-  const id = unvisitModalParkId;
+  const confirmUnvisit = () => {
+    const id = unvisitModalParkId;
 
-  const updatedVisited = { ...visited, [id]: false };
-  const updatedDates = { ...visitedDates };
-  delete updatedDates[id];
+    const updatedVisited = { ...visited, [id]: false };
+    const updatedDates = { ...visitedDates };
+    delete updatedDates[id];
 
-  setVisited(updatedVisited);
-  setVisitedDates(updatedDates);
+    setVisited(updatedVisited);
+    setVisitedDates(updatedDates);
 
-  // NEW: delete online instead of localStorage
-  await deleteVisitedPark(user.id, id);
+    localStorage.setItem("visitedParks", JSON.stringify(updatedVisited));
+    localStorage.setItem("visitedDates", JSON.stringify(updatedDates));
 
-  setUnvisitModalOpen2(false);
-  setUnvisitModalParkId(null);
-};
-
+    setUnvisitModalOpen2(false);
+    setUnvisitModalParkId(null);
+  };
 
 //////////BLOCK3//////////
 
