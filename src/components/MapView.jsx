@@ -19,11 +19,11 @@ async function loadParks() {
 
 //////////BLOCK1//////////
 
-
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
-import { loadVisitedParks, saveVisitedPark } from "../visitedParks"
+import { loadVisitedParks, saveVisitedPark, deleteVisitedPark } from "../visitedParks";
+import { useUser } from "@supabase/auth-helpers-react";
 
 
 // ---------------------------------------------------------
