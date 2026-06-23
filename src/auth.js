@@ -1,14 +1,31 @@
-import { supabase } from './supabase'
+import { useEffect, useState } from "react";
+import { createClient } from "@supabase/supabase-js";
 
-export async function signup(email, password) {
-  return await supabase.auth.signUp({ email, password })
-}
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
 
-export async function login(email, password) {
-  return await supabase.auth.signInWithPassword({ email, password })
-}
+export function useSupabaseAuth() {
+  const [user, setUser] = useState(null);
 
-export async function getUser() {
-  const { data } = await supabase.auth.getUser()
-  return data.user
+  useEffect(() => {
+    // Get initial session
+    supabase.auth.getSession().then(({ data }) => {
+      setUser(data.session?.user ?? null);
+    });
+
+    // Listen for auth changes
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        setUser(session?.user ?? null);
+      }
+    );
+
+    return () => {
+      listener.subscription.unsubscribe();
+    };
+  }, []);
+
+  return { user, supabase };
 }
