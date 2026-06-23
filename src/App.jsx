@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react'
 import Login from './Login'
 import MapView from './components/MapView'
-import { getUser } from './auth'
+import { useSupabaseAuth } from "./auth";
 
 export default function App() {
   const [user, setUser] = useState(null)

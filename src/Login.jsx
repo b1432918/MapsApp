@@ -1,111 +1,67 @@
-import { useState } from 'react'
-import { login } from './auth'
+import { useState } from "react";
+import { useSupabaseAuth } from "./auth";
 
-export default function Login({ onLogin }) {
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const [error, setError] = useState(null)
-  const [loading, setLoading] = useState(false)
+export default function Login() {
+  const { supabase } = useSupabaseAuth();
 
-  async function handleSubmit(e) {
-    e.preventDefault()
-    setError(null)
-    setLoading(true)
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
 
-    const { data, error } = await login(email, password)
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setError("");
 
-    setLoading(false)
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password
+    });
 
     if (error) {
-      setError(error.message)
-      return
+      setError(error.message);
     }
-
-    if (data?.user) {
-      onLogin(data.user)
-    }
-  }
+  };
 
   return (
-    <div style={styles.container}>
-      <h2 style={styles.title}>Log In</h2>
+    <div style={{ padding: "20px", maxWidth: "300px", margin: "0 auto" }}>
+      <h2>Login</h2>
 
-      <form onSubmit={handleSubmit} style={styles.form}>
+      <form onSubmit={handleLogin}>
         <input
           type="email"
           placeholder="Email"
           value={email}
-          onChange={e => setEmail(e.target.value)}
-          style={styles.input}
-          required
+          onChange={(e) => setEmail(e.target.value)}
+          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
         />
 
         <input
           type="password"
           placeholder="Password"
           value={password}
-          onChange={e => setPassword(e.target.value)}
-          style={styles.input}
-          required
+          onChange={(e) => setPassword(e.target.value)}
+          style={{ width: "100%", marginBottom: "10px", padding: "8px" }}
         />
 
-        {error && <div style={styles.error}>{error}</div>}
+        {error && (
+          <div style={{ color: "red", marginBottom: "10px" }}>{error}</div>
+        )}
 
-        <button type="submit" style={styles.button} disabled={loading}>
-          {loading ? 'Please wait…' : 'Log In'}
+        <button
+          type="submit"
+          style={{
+            width: "100%",
+            padding: "10px",
+            background: "#0078ff",
+            color: "white",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer"
+          }}
+        >
+          Login
         </button>
       </form>
-
-      <div style={styles.note}>
-        Signup is disabled. Contact the admin to get an account.
-      </div>
     </div>
-  )
-}
-
-const styles = {
-  container: {
-    maxWidth: 320,
-    margin: '80px auto',
-    padding: 24,
-    borderRadius: 12,
-    background: '#fff',
-    boxShadow: '0 4px 20px rgba(0,0,0,0.1)',
-    fontFamily: 'sans-serif'
-  },
-  title: {
-    marginBottom: 20,
-    textAlign: 'center'
-  },
-  form: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: 12
-  },
-  input: {
-    padding: 10,
-    fontSize: 16,
-    borderRadius: 6,
-    border: '1px solid #ccc'
-  },
-  button: {
-    padding: 12,
-    fontSize: 16,
-    borderRadius: 6,
-    border: 'none',
-    background: '#007bff',
-    color: '#fff',
-    cursor: 'pointer'
-  },
-  error: {
-    color: 'red',
-    fontSize: 14,
-    textAlign: 'center'
-  },
-  note: {
-    marginTop: 16,
-    textAlign: 'center',
-    fontSize: 13,
-    color: '#666'
-  }
+  );
 }
