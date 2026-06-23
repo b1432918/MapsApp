@@ -1,0 +1,1058 @@
+[
+  {
+    "id": 1,
+    "type": "park",
+    "name": "Alafia River State Park",
+    "lat": 27.7967,
+    "lng": -82.1117,
+    "features": ["Bicycling","Hiking","Trails","Camping","Parking","Restrooms"]
+  },
+  {
+    "id": 2,
+    "type": "park",
+    "name": "Amelia Island State Park",
+    "lat": 30.5303,
+    "lng": -81.4395,
+    "features": ["Beach","Fishing","Boating","Parking","Restrooms"]
+  },
+  {
+    "id": 3,
+    "type": "park",
+    "name": "Anastasia State Park",
+    "lat": 29.8765,
+    "lng": -81.2880,
+    "features": ["Beach","Trails","Swimming","Camping","Parking","Restrooms","Showers"]
+  },
+  {
+    "id": 4,
+    "type": "park",
+    "name": "Avalon State Park",
+    "lat": 27.5420,
+    "lng": -80.3250,
+    "features": ["Beach","Swimming","Parking"]
+  },
+  {
+    "id": 5,
+    "type": "park",
+    "name": "Bahia Honda State Park",
+    "lat": 24.6613,
+    "lng": -81.2743,
+    "features": ["Beach","Swimming","Trails","Camping","Parking","Restrooms","Showers","Cabins","Boat Ramp"]
+  },
+  {
+    "id": 6,
+    "type": "park",
+    "name": "Bald Point State Park",
+    "lat": 29.9121,
+    "lng": -84.3707,
+    "features": ["Beach","Trails","Hiking","Parking","Restrooms"]
+  },
+  {
+    "id": 7,
+    "type": "park",
+    "name": "Big Lagoon State Park",
+    "lat": 30.3183,
+    "lng": -87.4033,
+    "features": ["Trails","Paddling","Boating","Camping","Parking","Restrooms","Showers"]
+  },
+  {
+    "id": 8,
+    "type": "park",
+    "name": "Big Shoals State Park",
+    "lat": 30.3867,
+    "lng": -82.7501,
+    "features": ["Hiking","Trails","Bicycling","Parking"]
+  },
+  {
+    "id": 9,
+    "type": "park",
+    "name": "Bill Baggs Cape Florida State Park",
+    "lat": 25.6730,
+    "lng": -80.1580,
+    "features": ["Beach","Swimming","Trails","Bicycling","Parking","Restrooms","Boat Ramp"]
+  },
+  {
+    "id": 10,
+    "type": "park",
+    "name": "Blackwater River State Park",
+    "lat": 30.7243,
+    "lng": -86.8894,
+    "features": ["Tubing","Trails","Hiking","Camping","Parking","Restrooms"]
+  },
+  {
+    "id": 11,
+    "type": "park",
+    "name": "Blue Spring State Park",
+    "lat": 28.9480,
+    "lng": -81.3390,
+    "features": ["Swimming","Tubing","Trails","Parking","Restrooms","Showers","Cabins"]
+  },
+  {
+    "id": 12,
+    "type": "park",
+    "name": "Bulow Creek State Park",
+    "lat": 29.3860,
+    "lng": -81.1220,
+    "features": ["Hiking","Trails","Parking"]
+  },
+  {
+    "id": 13,
+    "type": "park",
+    "name": "Bulow Plantation Ruins Historic State Park",
+    "lat": 29.4140,
+    "lng": -81.1460,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 14,
+    "type": "park",
+    "name": "Camp Helen State Park",
+    "lat": 30.2770,
+    "lng": -85.9920,
+    "features": ["Beach","Trails","Swimming","Parking","Restrooms"]
+  },
+  {
+    "id": 15,
+    "type": "park",
+    "name": "Cayo Costa State Park",
+    "lat": 26.6880,
+    "lng": -82.2450,
+    "features": ["Beach","Trails","Camping","Swimming","Paddling","Cabins","Boat Ramp"]
+  },
+  {
+    "id": 16,
+    "type": "park",
+    "name": "Cedar Key Museum State Park",
+    "lat": 29.1340,
+    "lng": -83.0350,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 17,
+    "type": "park",
+    "name": "Cedar Key Scrub State Reserve",
+    "lat": 29.1920,
+    "lng": -83.0560,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 18,
+    "type": "park",
+    "name": "Charlotte Harbor Preserve State Park",
+    "lat": 26.9660,
+    "lng": -82.0710,
+    "features": ["Trails","Hiking","Paddling","Parking"]
+  },
+  {
+    "id": 19,
+    "type": "park",
+    "name": "Cherokee Sink Trail (Wakulla)",
+    "lat": 30.2380,
+    "lng": -84.3020,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 20,
+    "type": "park",
+    "name": "Collier-Seminole State Park",
+    "lat": 25.9920,
+    "lng": -81.6080,
+    "features": ["Trails","Hiking","Camping","Paddling","Parking","Restrooms","Showers"]
+  },
+  {
+    "id": 21,
+    "type": "park",
+    "name": "Colt Creek State Park",
+    "lat": 28.2580,
+    "lng": -82.0670,
+    "features": ["Trails","Hiking","Bicycling","Camping","Parking","Restrooms","Showers"]
+  },
+  {
+    "id": 22,
+    "type": "park",
+    "name": "Crystal River Preserve State Park",
+    "lat": 28.9180,
+    "lng": -82.6200,
+    "features": ["Trails","Hiking","Paddling","Parking"]
+  },
+  {
+    "id": 23,
+    "type": "park",
+    "name": "Crystal River Archaeological State Park",
+    "lat": 28.9170,
+    "lng": -82.5940,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 24,
+    "type": "park",
+    "name": "Curry Hammock State Park",
+    "lat": 24.7490,
+    "lng": -80.9680,
+    "features": ["Beach","Swimming","Trails","Camping","Paddling","Parking","Restrooms"]
+  },
+  {
+    "id": 25,
+    "type": "park",
+    "name": "Dagny Johnson Key Largo Hammock Botanical State Park",
+    "lat": 25.2770,
+    "lng": -80.3060,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 26,
+    "type": "park",
+    "name": "De Leon Springs State Park",
+    "lat": 29.1280,
+    "lng": -81.3540,
+    "features": ["Swimming","Trails","Hiking","Parking","Restrooms"]
+  },
+  {
+    "id": 27,
+    "type": "park",
+    "name": "Delnor-Wiggins Pass State Park",
+    "lat": 26.2720,
+    "lng": -81.8210,
+    "features": ["Beach","Swimming","Parking","Restrooms"]
+  },
+  {
+    "id": 28,
+    "type": "park",
+    "name": "Devil's Millhopper Geological State Park",
+    "lat": 29.7040,
+    "lng": -82.3850,
+    "features": ["Trails","Hiking","Parking","Restrooms"]
+  },
+  {
+    "id": 29,
+    "type": "park",
+    "name": "Dudley Farm Historic State Park",
+    "lat": 29.6580,
+    "lng": -82.4970,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 30,
+    "type": "park",
+    "name": "Dunns Creek State Park",
+    "lat": 29.5900,
+    "lng": -81.6390,
+    "features": ["Trails","Hiking","Paddling","Parking"]
+  },
+  {
+    "id": 31,
+    "type": "park",
+    "name": "Econfina River State Park",
+    "lat": 30.2900,
+    "lng": -83.9230,
+    "features": ["Trails","Hiking","Paddling","Parking","Restrooms"]
+  },
+  {
+    "id": 32,
+    "type": "park",
+    "name": "Eden Gardens State Park",
+    "lat": 30.3780,
+    "lng": -86.1460,
+    "features": ["Trails","Parking","Restrooms"]
+  },
+  {
+    "id": 33,
+    "type": "park",
+    "name": "Edward Ball Wakulla Springs State Park",
+    "lat": 30.2390,
+    "lng": -84.3030,
+    "features": ["Swimming","Trails","Parking","Restrooms"]
+  },
+  {
+    "id": 34,
+    "type": "park",
+    "name": "Ellie Schiller Homosassa Springs Wildlife State Park",
+    "lat": 28.8000,
+    "lng": -82.5750,
+    "features": ["Trails","Parking","Restrooms"]
+  },
+  {
+    "id": 35,
+    "type": "park",
+    "name": "Fakahatchee Strand Preserve State Park",
+    "lat": 25.9420,
+    "lng": -81.3660,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 36,
+    "type": "park",
+    "name": "Falling Waters State Park",
+    "lat": 30.7200,
+    "lng": -85.6640,
+    "features": ["Trails","Hiking","Camping","Parking","Restrooms","Showers","Cabins"]
+  },
+  {
+    "id": 37,
+    "type": "park",
+    "name": "Faver-Dykes State Park",
+    "lat": 29.6500,
+    "lng": -81.2810,
+    "features": ["Trails","Hiking","Camping","Paddling","Parking","Restrooms","Cabins"]
+  },
+  {
+    "id": 38,
+    "type": "park",
+    "name": "Florida Caverns State Park",
+    "lat": 30.8140,
+    "lng": -85.2410,
+    "features": ["Trails","Hiking","Camping","Parking","Restrooms","Showers","Cabins"]
+  },
+  {
+    "id": 39,
+    "type": "park",
+    "name": "Fort Cooper State Park",
+    "lat": 28.8620,
+    "lng": -82.2920,
+    "features": ["Trails","Hiking","Parking","Restrooms"]
+  },
+  {
+    "id": 40,
+    "type": "park",
+    "name": "Fort George Island Cultural State Park",
+    "lat": 30.4380,
+    "lng": -81.4300,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 41,
+    "type": "park",
+    "name": "Fort Mose Historic State Park",
+    "lat": 29.9230,
+    "lng": -81.3230,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 42,
+    "type": "park",
+    "name": "Fort Pierce Inlet State Park",
+    "lat": 27.4780,
+    "lng": -80.2960,
+    "features": ["Beach","Swimming","Trails","Parking","Restrooms"]
+  },
+  {
+    "id": 43,
+    "type": "park",
+    "name": "Fort Zachary Taylor Historic State Park",
+    "lat": 24.5460,
+    "lng": -81.8070,
+    "features": ["Beach","Swimming","Trails","Parking","Restrooms"]
+  },
+  {
+    "id": 44,
+    "type": "park",
+    "name": "Gamble Rogers Memorial State Recreation Area",
+    "lat": 29.4310,
+    "lng": -81.1120,
+    "features": ["Beach","Swimming","Camping","Parking","Restrooms","Showers"]
+  },
+  {
+    "id": 45,
+    "type": "park",
+    "name": "Gasparilla Island State Park",
+    "lat": 26.7420,
+    "lng": -82.2630,
+    "features": ["Beach","Swimming","Trails","Parking","Restrooms"]
+  },
+  {
+    "id": 46,
+    "type": "park",
+    "name": "George Crady Bridge Fishing Pier State Park",
+    "lat": 30.5140,
+    "lng": -81.4520,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 47,
+    "type": "park",
+    "name": "Gilchrist Blue Springs State Park",
+    "lat": 29.8290,
+    "lng": -82.7020,
+    "features": ["Swimming","Trails","Camping","Parking","Restrooms"]
+  },
+  {
+    "id": 48,
+    "type": "park",
+    "name": "Grayton Beach State Park",
+    "lat": 30.3290,
+    "lng": -86.1610,
+    "features": ["Beach","Swimming","Trails","Camping","Parking","Restrooms","Showers","Cabins"]
+  },
+  {
+    "id": 49,
+    "type": "park",
+    "name": "Henderson Beach State Park",
+    "lat": 30.3830,
+    "lng": -86.4430,
+    "features": ["Beach","Swimming","Trails","Parking","Restrooms","Showers"]
+  },
+  {
+    "id": 50,
+    "type": "park",
+    "name": "Hillsborough River State Park",
+    "lat": 28.1480,
+    "lng": -82.2310,
+    "features": ["Trails","Hiking","Camping","Paddling","Parking","Restrooms","Showers"]
+  },
+  {
+    "id": 51,
+    "type": "park",
+    "name": "Honeymoon Island State Park",
+    "lat": 28.0610,
+    "lng": -82.8280,
+    "features": ["Beach","Swimming","Trails","Parking","Restrooms"]
+  },
+  {
+    "id": 52,
+    "type": "park",
+    "name": "Hontoon Island State Park",
+    "lat": 28.9880,
+    "lng": -81.3660,
+    "features": ["Trails","Hiking","Camping","Paddling","Parking","Restrooms","Boat Ramp"]
+  },
+  {
+    "id": 53,
+    "type": "park",
+    "name": "Hugh Taylor Birch State Park",
+    "lat": 26.1510,
+    "lng": -80.1040,
+    "features": ["Trails","Bicycling","Paddling","Parking","Restrooms"]
+  },
+  {
+    "id": 54,
+    "type": "park",
+    "name": "Ichetucknee Springs State Park",
+    "lat": 29.9840,
+    "lng": -82.7570,
+    "features": ["Tubing","Swimming","Trails","Parking","Restrooms"]
+  },
+  {
+    "id": 55,
+    "type": "park",
+    "name": "John D. MacArthur Beach State Park",
+    "lat": 26.8390,
+    "lng": -80.0330,
+    "features": ["Beach","Swimming","Trails","Paddling","Parking","Restrooms"]
+  },
+  {
+    "id": 56,
+    "type": "park",
+    "name": "John G. and Susan H. Dupuis Jr. State Park",
+    "lat": 26.9400,
+    "lng": -80.5880,
+    "features": ["Trails","Hiking","Camping","Parking"]
+  },
+  {
+    "id": 57,
+    "type": "park",
+    "name": "Jonathan Dickinson State Park",
+    "lat": 27.0030,
+    "lng": -80.1120,
+    "features": ["Trails","Hiking","Bicycling","Camping","Paddling","Parking","Restrooms","Showers","Cabins"]
+  },
+  {
+    "id": 58,
+    "type": "park",
+    "name": "Kissimmee Prairie Preserve State Park",
+    "lat": 27.5820,
+    "lng": -81.0460,
+    "features": ["Trails","Hiking","Camping","Stargazing","Parking","Restrooms"]
+  },
+  {
+    "id": 59,
+    "type": "park",
+    "name": "Koreshan State Park",
+    "lat": 26.4330,
+    "lng": -81.8120,
+    "features": ["Trails","Hiking","Camping","Paddling","Parking","Restrooms","Showers","Cabins"]
+  },
+  {
+    "id": 60,
+    "type": "park",
+    "name": "Lake Griffin State Park",
+    "lat": 28.8610,
+    "lng": -81.8840,
+    "features": ["Trails","Hiking","Paddling","Camping","Parking","Restrooms","Showers","Boat Ramp"]
+  },
+  {
+    "id": 61,
+    "type": "park",
+    "name": "Lake Kissimmee State Park",
+    "lat": 27.9490,
+    "lng": -81.1470,
+    "features": ["Trails","Hiking","Bicycling","Camping","Paddling","Parking","Restrooms","Showers","Boat Ramp"]
+  },
+  {
+    "id": 62,
+    "type": "park",
+    "name": "Lake Louisa State Park",
+    "lat": 28.5050,
+    "lng": -81.7420,
+    "features": ["Trails","Hiking","Bicycling","Camping","Paddling","Parking","Restrooms","Showers","Cabins","Boat Ramp"]
+  },
+  {
+    "id": 63,
+    "type": "park",
+    "name": "Lake Manatee State Park",
+    "lat": 27.4950,
+    "lng": -82.3440,
+    "features": ["Trails","Hiking","Camping","Paddling","Parking","Restrooms","Showers","Boat Ramp"]
+  },
+  {
+    "id": 64,
+    "type": "park",
+    "name": "Lake Talquin State Park",
+    "lat": 30.4490,
+    "lng": -84.5400,
+    "features": ["Trails","Hiking","Paddling","Parking"]
+  },
+  {
+    "id": 65,
+    "type": "park",
+    "name": "Letchworth-Love Mounds Archaeological State Park",
+    "lat": 30.4690,
+    "lng": -83.9930,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 66,
+    "type": "park",
+    "name": "Lignumvitae Key Botanical State Park",
+    "lat": 24.9060,
+    "lng": -80.6920,
+    "features": ["Trails","Paddling","Parking","Boat Ramp"]
+  },
+  {
+    "id": 67,
+    "type": "park",
+    "name": "Little Manatee River State Park",
+    "lat": 27.6740,
+    "lng": -82.3530,
+    "features": ["Trails","Hiking","Camping","Paddling","Parking","Restrooms","Showers"]
+  },
+  {
+    "id": 68,
+    "type": "park",
+    "name": "Little Talbot Island State Park",
+    "lat": 30.4940,
+    "lng": -81.3970,
+    "features": ["Beach","Swimming","Trails","Camping","Parking","Restrooms","Showers"]
+  },
+  {
+    "id": 69,
+    "type": "park",
+    "name": "Long Key State Park",
+    "lat": 24.8270,
+    "lng": -80.8140,
+    "features": ["Beach","Trails","Camping","Paddling","Parking","Restrooms"]
+  },
+  {
+    "id": 70,
+    "type": "park",
+    "name": "Lower Wekiva River Preserve State Park",
+    "lat": 28.8380,
+    "lng": -81.3800,
+    "features": ["Trails","Hiking","Paddling","Parking"]
+  },
+  {
+    "id": 71,
+    "type": "park",
+    "name": "Lovers Key State Park",
+    "lat": 26.4110,
+    "lng": -81.8790,
+    "features": ["Beach","Swimming","Trails","Paddling","Parking","Restrooms"]
+  },
+  {
+    "id": 72,
+    "type": "park",
+    "name": "Madison Blue Spring State Park",
+    "lat": 30.4760,
+    "lng": -83.2440,
+    "features": ["Swimming","Trails","Parking","Restrooms"]
+  },
+  {
+    "id": 73,
+    "type": "park",
+    "name": "Manatee Springs State Park",
+    "lat": 29.4920,
+    "lng": -82.9710,
+    "features": ["Swimming","Trails","Camping","Paddling","Parking","Restrooms","Showers"]
+  },
+  {
+    "id": 74,
+    "type": "park",
+    "name": "Mike Roess Gold Head Branch State Park",
+    "lat": 29.8210,
+    "lng": -81.9550,
+    "features": ["Trails","Hiking","Camping","Parking","Restrooms","Showers"]
+  },
+  {
+    "id": 75,
+    "type": "park",
+    "name": "Myakka River State Park",
+    "lat": 27.2400,
+    "lng": -82.3150,
+    "features": ["Trails","Hiking","Bicycling","Camping","Paddling","Parking","Restrooms","Showers","Boat Ramp","Cabins"]
+  },
+  {
+    "id": 76,
+    "type": "park",
+    "name": "Natural Bridge Battlefield Historic State Park",
+    "lat": 30.2500,
+    "lng": -84.2000,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 77,
+    "type": "park",
+    "name": "O’Leno State Park",
+    "lat": 29.9130,
+    "lng": -82.5810,
+    "features": ["Trails","Hiking","Camping","Parking","Restrooms","Showers","Cabins"]
+  },
+  {
+    "id": 78,
+    "type": "park",
+    "name": "Oleta River State Park",
+    "lat": 25.9240,
+    "lng": -80.1440,
+    "features": ["Trails","Bicycling","Paddling","Swimming","Parking","Restrooms","Cabins"]
+  },
+  {
+    "id": 79,
+    "type": "park",
+    "name": "Olustee Battlefield Historic State Park",
+    "lat": 30.2030,
+    "lng": -82.4280,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 80,
+    "type": "park",
+    "name": "Orman House Historic State Park",
+    "lat": 29.7260,
+    "lng": -84.9860,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 81,
+    "type": "park",
+    "name": "Oscar Scherer State Park",
+    "lat": 27.1790,
+    "lng": -82.4680,
+    "features": ["Trails","Hiking","Bicycling","Camping","Swimming","Parking","Restrooms","Showers","Boat Ramp"]
+  },
+  {
+    "id": 82,
+    "type": "park",
+    "name": "Paynes Creek Historic State Park",
+    "lat": 27.7530,
+    "lng": -81.8130,
+    "features": ["Trails","Hiking","Parking","Restrooms"]
+  },
+  {
+    "id": 83,
+    "type": "park",
+    "name": "Paynes Prairie Preserve State Park",
+    "lat": 29.6110,
+    "lng": -82.3020,
+    "features": ["Trails","Hiking","Bicycling","Camping","Parking","Restrooms","Boat Ramp"]
+  },
+  {
+    "id": 84,
+    "type": "park",
+    "name": "Perdido Key State Park",
+    "lat": 30.2830,
+    "lng": -87.4840,
+    "features": ["Beach","Swimming","Parking","Restrooms"]
+  },
+  {
+    "id": 85,
+    "type": "park",
+    "name": "Pumpkin Hill Creek Preserve State Park",
+    "lat": 30.5050,
+    "lng": -81.4880,
+    "features": ["Trails","Hiking","Paddling","Parking"]
+  },
+  {
+    "id": 86,
+    "type": "park",
+    "name": "Rainbow Springs State Park",
+    "lat": 29.1040,
+    "lng": -82.4380,
+    "features": ["Swimming","Trails","Paddling","Parking","Restrooms","Boat Ramp"]
+  },
+  {
+    "id": 87,
+    "type": "park",
+    "name": "Ravine Gardens State Park",
+    "lat": 29.6470,
+    "lng": -81.6370,
+    "features": ["Trails","Hiking","Parking","Restrooms"]
+  },
+  {
+    "id": 88,
+    "type": "park",
+    "name": "River Rise Preserve State Park",
+    "lat": 29.9130,
+    "lng": -82.5810,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 89,
+    "type": "park",
+    "name": "Rock Springs Run State Reserve",
+    "lat": 28.7560,
+    "lng": -81.4910,
+    "features": ["Trails","Hiking","Bicycling","Paddling","Parking"]
+  },
+  {
+    "id": 90,
+    "type": "park",
+    "name": "San Felasco Hammock Preserve State Park",
+    "lat": 29.7370,
+    "lng": -82.4410,
+    "features": ["Trails","Hiking","Bicycling","Parking"]
+  },
+  {
+    "id": 91,
+    "type": "park",
+    "name": "San Marcos de Apalache Historic State Park",
+    "lat": 30.1520,
+    "lng": -84.2100,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 92,
+    "type": "park",
+    "name": "Savannas Preserve State Park",
+    "lat": 27.3150,
+    "lng": -80.2960,
+    "features": ["Trails","Hiking","Paddling","Parking"]
+  },
+  {
+    "id": 93,
+    "type": "park",
+    "name": "Sebastian Inlet State Park",
+    "lat": 27.8600,
+    "lng": -80.4480,
+    "features": ["Beach","Swimming","Trails","Camping","Parking","Restrooms","Showers"]
+  },
+  {
+    "id": 94,
+    "type": "park",
+    "name": "Seabranch Preserve State Park",
+    "lat": 27.0990,
+    "lng": -80.1930,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 95,
+    "type": "park",
+    "name": "Silver Springs State Park",
+    "lat": 29.2170,
+    "lng": -82.0590,
+    "features": ["Trails","Hiking","Camping","Paddling","Parking","Restrooms","Showers","Boat Ramp"]
+  },
+  {
+    "id": 96,
+    "type": "park",
+    "name": "Skyway Fishing Pier State Park",
+    "lat": 27.6350,
+    "lng": -82.7260,
+    "features": ["Parking","Restrooms"]
+  },
+  {
+    "id": 97,
+    "type": "park",
+    "name": "St. Andrews State Park",
+    "lat": 30.1300,
+    "lng": -85.7400,
+    "features": ["Beach","Swimming","Trails","Camping","Boating","Parking","Restrooms","Showers","Boat Ramp"]
+  },
+  {
+    "id": 98,
+    "type": "park",
+    "name": "St. George Island State Park",
+    "lat": 29.7110,
+    "lng": -84.7490,
+    "features": ["Beach","Swimming","Trails","Camping","Parking","Restrooms","Showers"]
+  },
+  {
+    "id": 99,
+    "type": "park",
+    "name": "St. Joseph Peninsula State Park",
+    "lat": 29.7740,
+    "lng": -85.3950,
+    "features": ["Beach","Swimming","Trails","Camping","Parking","Restrooms","Showers","Boat Ramp"]
+  },
+  {
+    "id": 100,
+    "type": "park",
+    "name": "St. Lucie Inlet Preserve State Park",
+    "lat": 27.1650,
+    "lng": -80.1610,
+    "features": ["Beach","Trails","Paddling","Parking"]
+  },
+  {
+    "id": 101,
+    "type": "park",
+    "name": "St. Marks River Preserve State Park",
+    "lat": 30.3380,
+    "lng": -84.1380,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 102,
+    "type": "park",
+    "name": "St. Sebastian River Preserve State Park",
+    "lat": 27.8060,
+    "lng": -80.5690,
+    "features": ["Trails","Hiking","Bicycling","Parking"]
+  },
+  {
+    "id": 103,
+    "type": "park",
+    "name": "Stephen Foster Folk Culture Center State Park",
+    "lat": 30.3300,
+    "lng": -82.7500,
+    "features": ["Trails","Hiking","Camping","Parking","Restrooms","Showers","Cabins"]
+  },
+  {
+    "id": 104,
+    "type": "park",
+    "name": "Stump Pass Beach State Park",
+    "lat": 26.9120,
+    "lng": -82.3520,
+    "features": ["Beach","Trails","Swimming","Parking","Restrooms"]
+  },
+  {
+    "id": 105,
+    "type": "park",
+    "name": "Suwannee River State Park",
+    "lat": 30.3860,
+    "lng": -83.1640,
+    "features": ["Trails","Hiking","Camping","Paddling","Parking","Restrooms","Showers","Boat Ramp"]
+  },
+  {
+    "id": 106,
+    "type": "park",
+    "name": "T.H. Stone Memorial St. Joseph Peninsula State Park",
+    "lat": 29.7740,
+    "lng": -85.3950,
+    "features": ["Beach","Swimming","Trails","Camping","Parking","Restrooms","Showers"]
+  },
+  {
+    "id": 107,
+    "type": "park",
+    "name": "Tarkiln Bayou Preserve State Park",
+    "lat": 30.3530,
+    "lng": -87.3580,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 108,
+    "type": "park",
+    "name": "Terra Ceia Preserve State Park",
+    "lat": 27.5860,
+    "lng": -82.5630,
+    "features": ["Trails","Hiking","Paddling","Parking"]
+  },
+  {
+    "id": 109,
+    "type": "park",
+    "name": "Three Rivers State Park",
+    "lat": 30.7100,
+    "lng": -84.9460,
+    "features": ["Trails","Hiking","Camping","Boating","Parking","Restrooms","Showers","Boat Ramp"]
+  },
+  {
+    "id": 110,
+    "type": "park",
+    "name": "Topsail Hill Preserve State Park",
+    "lat": 30.3610,
+    "lng": -86.2730,
+    "features": ["Beach","Trails","Camping","Swimming","Parking","Restrooms","Showers","Cabins"]
+  },
+  {
+    "id": 111,
+    "type": "park",
+    "name": "Torreya State Park",
+    "lat": 30.5750,
+    "lng": -84.9470,
+    "features": ["Trails","Hiking","Camping","Parking","Restrooms","Showers","Cabins"]
+  },
+  {
+    "id": 112,
+    "type": "park",
+    "name": "Waccasassa Bay Preserve State Park",
+    "lat": 29.0830,
+    "lng": -82.8500,
+    "features": ["Paddling","Trails","Parking"]
+  },
+  {
+    "id": 113,
+    "type": "park",
+    "name": "Washington Oaks Gardens State Park",
+    "lat": 29.6200,
+    "lng": -81.2070,
+    "features": ["Trails","Hiking","Parking","Restrooms"]
+  },
+  {
+    "id": 114,
+    "type": "park",
+    "name": "Weeki Wachee Springs State Park",
+    "lat": 28.5150,
+    "lng": -82.5720,
+    "features": ["Swimming","Trails","Parking","Restrooms"]
+  },
+  {
+    "id": 115,
+    "type": "park",
+    "name": "Wekiwa Springs State Park",
+    "lat": 28.7090,
+    "lng": -81.4630,
+    "features": ["Swimming","Trails","Hiking","Camping","Paddling","Parking","Restrooms","Showers","Cabins","Boat Ramp"]
+  },
+  {
+    "id": 116,
+    "type": "park",
+    "name": "Werner-Boyce Salt Springs State Park",
+    "lat": 28.3000,
+    "lng": -82.7000,
+    "features": ["Trails","Hiking","Paddling","Parking"]
+  },
+  {
+    "id": 117,
+    "type": "park",
+    "name": "Windley Key Fossil Reef Geological State Park",
+    "lat": 24.9540,
+    "lng": -80.5550,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 118,
+    "type": "park",
+    "name": "Lake Jackson Mounds Archaeological State Park",
+    "lat": 30.5120,
+    "lng": -84.3150,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 119,
+    "type": "park",
+    "name": "Washington Oaks Gardens State Park",
+    "lat": 29.6200,
+    "lng": -81.2070,
+    "features": ["Trails","Hiking","Parking","Restrooms"]
+  },
+  {
+    "id": 120,
+    "type": "park",
+    "name": "Ellie Schiller Homosassa Springs Wildlife State Park",
+    "lat": 28.8000,
+    "lng": -82.5750,
+    "features": ["Trails","Parking","Restrooms"]
+  },
+  {
+    "id": 121,
+    "type": "park",
+    "name": "Edward Ball Wakulla Springs State Park",
+    "lat": 30.2390,
+    "lng": -84.3030,
+    "features": ["Swimming","Trails","Parking","Restrooms"]
+  },
+  {
+    "id": 122,
+    "type": "park",
+    "name": "Lake Jackson Mounds Archaeological State Park",
+    "lat": 30.5120,
+    "lng": -84.3150,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 123,
+    "type": "park",
+    "name": "Natural Bridge Battlefield Historic State Park",
+    "lat": 30.2500,
+    "lng": -84.2000,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 124,
+    "type": "park",
+    "name": "Olustee Battlefield Historic State Park",
+    "lat": 30.2030,
+    "lng": -82.4280,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 125,
+    "type": "park",
+    "name": "San Marcos de Apalache Historic State Park",
+    "lat": 30.1520,
+    "lng": -84.2100,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 126,
+    "type": "park",
+    "name": "Orman House Historic State Park",
+    "lat": 29.7260,
+    "lng": -84.9860,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 127,
+    "type": "park",
+    "name": "Dudley Farm Historic State Park",
+    "lat": 29.6580,
+    "lng": -82.4970,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 128,
+    "type": "park",
+    "name": "Lake Jackson Mounds Archaeological State Park",
+    "lat": 30.5120,
+    "lng": -84.3150,
+    "features": ["Trails","Hiking","Parking"]
+  },
+  {
+    "id": 129,
+    "type": "park",
+    "name": "San Marcos de Apalache Historic State Park",
+    "lat": 30.1520,
+    "lng": -84.2100,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 130,
+    "type": "park",
+    "name": "Olustee Battlefield Historic State Park",
+    "lat": 30.2030,
+    "lng": -82.4280,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 131,
+    "type": "park",
+    "name": "Natural Bridge Battlefield Historic State Park",
+    "lat": 30.2500,
+    "lng": -84.2000,
+    "features": ["Trails","Parking"]
+  },
+  {
+    "id": 132,
+    "type": "park",
+    "name": "Orman House Historic State Park",
+    "lat": 29.7260,
+    "lng": -84.9860,
+    "features": ["Trails","Parking"]
+  }
+]
