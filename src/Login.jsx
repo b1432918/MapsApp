@@ -19,7 +19,11 @@ export default function Login() {
 
     if (error) {
       setError(error.message);
+      return;
     }
+
+    // Login succeeded — reload app so App.jsx sees the new user
+    window.location.href = "/";
   };
 
   return (

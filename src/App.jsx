@@ -1,22 +1,15 @@
-import { useState, useEffect } from 'react'
-import Login from './Login'
-import MapView from './components/MapView'
 import { useSupabaseAuth } from "./auth";
+import MapView from "./components/MapView";
+import Login from "./Login";
 
 export default function App() {
-  const [user, setUser] = useState(null)
+  const { user } = useSupabaseAuth();
 
-  useEffect(() => {
-    async function init() {
-      const u = await getUser()
-      if (u) setUser(u)
-    }
-    init()
-  }, [])
-
+  // Not logged in → show login screen
   if (!user) {
-    return <Login onLogin={setUser} />
+    return <Login />;
   }
 
-  return <MapView user={user} />
+  // Logged in → show map
+  return <MapView />;
 }
