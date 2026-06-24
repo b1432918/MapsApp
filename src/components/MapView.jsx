@@ -113,15 +113,35 @@ useEffect(() => {
   async function init() {
     if (!user) return;
 
-    const { visitedSet, visitedDatesMap } = await loadVisitedParks(user.id);
+    const { data, error } = await supabase
+      .from("visited_parks")
+      .select("park_id, visited_date")
+      .eq("user_id", user.id);
+
+    if (error) {
+      console.error("Error loading visited parks:", error);
+      return;
+    }
+
+    // Convert DB rows into your three state formats
+    const visitedSet = new Set();
+    const visitedObj = {};
+    const datesObj = {};
+
+    data.forEach((row) => {
+      visitedSet.add(row.park_id);
+      visitedObj[row.park_id] = true;
+      datesObj[row.park_id] = row.visited_date;
+    });
 
     // For marker icons
     setVisitedParks(visitedSet);
 
     // For your existing UI logic (modals, filters, dates)
-    setVisited(visitedDatesMap);
-    setVisitedDates(visitedDatesMap);
+    setVisited(visitedObj);
+    setVisitedDates(datesObj);
   }
+
   init();
 }, [user]);
 
@@ -178,101 +198,58 @@ async function handleUnvisit(parkId) {
     return updated;
   });
 }
-//////////BLOCK2//////////
 
 // ---------------------------------------------------------
-// FEATURE EDITING
+// FIXED: CONFIRM VISIT (MODAL)
 // ---------------------------------------------------------
-
-  const addFeature = (id, feature) => {
-    if (!feature.trim()) return;
-
-    const updated = {
-      ...parkData,
-      [id]: {
-        ...parkData[id],
-        features: [...new Set([...parkData[id].features, feature])]
-      }
-    };
-
-    setParkData(updated);
-    localStorage.setItem("parkData", JSON.stringify(updated));
-  };
-
-  const deleteSelectedFeatures = () => {
-    const id = featureDeleteParkId;
-
-    const updated = {
-      ...parkData,
-      [id]: {
-        ...parkData[id],
-        features: parkData[id].features.filter(
-          (f) => !featureDeleteSelection.includes(f)
-        )
-      }
-    };
-
-    setParkData(updated);
-    localStorage.setItem("parkData", JSON.stringify(updated));
-
-    setFeatureDeleteConfirmModal(false);
-    setFeatureDeleteModal(false);
-    setFeatureDeleteParkId(null);
-    setFeatureDeleteSelection([]);
-  };
-
-// ---------------------------------------------------------
-// VISIT / UNVISIT LOGIC
-// ---------------------------------------------------------
-
-const requestVisitDate = (id) => {
-  setVisitModalParkId(id);
-  setVisitModalDate("");
-  setVisitModalOpen(true);
-};
-
-const confirmVisit = async () => {   // MUST be async
+const confirmVisit = async () => {
   if (!visitModalDate) return;
 
   const id = visitModalParkId;
 
-  const updatedVisited = { ...visited, [id]: true };
-  const updatedDates = { ...visitedDates, [id]: visitModalDate };
+  // Update UI immediately
+  setVisited(prev => ({ ...prev, [id]: true }));
+  setVisitedDates(prev => ({ ...prev, [id]: visitModalDate }));
+  setVisitedParks(prev => new Set([...prev, id]));
 
-  setVisited(updatedVisited);
-  setVisitedDates(updatedDates);
+  // FIXED: include supabase client
+  await saveVisitedPark(supabase, user.id, id, visitModalDate);
 
-  // NEW: save online instead of localStorage
-  await saveVisitedPark(user.id, id, visitModalDate);
-
+  // Close modal
   setVisitModalOpen(false);
   setVisitModalParkId(null);
   setVisitModalDate("");
 };
 
-const requestUnvisitConfirmation1 = (id) => {
-  setUnvisitModalParkId(id);
-  setUnvisitModalOpen1(true);
-};
-
-const proceedToSecondUnvisitModal = () => {
-  setUnvisitModalOpen1(false);
-  setUnvisitModalOpen2(true);
-};
-
-const confirmUnvisit = async () => {   // MUST be async
+// ---------------------------------------------------------
+// FIXED: CONFIRM UNVISIT (MODAL)
+// ---------------------------------------------------------
+const confirmUnvisit = async () => {
   const id = unvisitModalParkId;
 
-  const updatedVisited = { ...visited, [id]: false };
-  const updatedDates = { ...visitedDates };
-  delete updatedDates[id];
+  // Update UI immediately
+  setVisited(prev => {
+    const updated = { ...prev };
+    delete updated[id];
+    return updated;
+  });
 
-  setVisited(updatedVisited);
-  setVisitedDates(updatedDates);
+  setVisitedDates(prev => {
+    const updated = { ...prev };
+    delete updated[id];
+    return updated;
+  });
 
-  // NEW: delete online instead of localStorage
-  await deleteVisitedPark(user.id, id);
+  setVisitedParks(prev => {
+    const updated = new Set(prev);
+    updated.delete(id);
+    return updated;
+  });
 
+  // FIXED: include supabase client
+  await deleteVisitedPark(supabase, user.id, id);
+
+  // Close modal
   setUnvisitModalOpen2(false);
   setUnvisitModalParkId(null);
 };
