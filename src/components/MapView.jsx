@@ -112,17 +112,17 @@ useEffect(() => {
   async function init() {
     if (!user) return;
 
-    const { data, error } = await supabase
-      .from("visited_parks")
-      .select("park_id, visited_date")
-      .eq("user_id", user.id);
+  const { data, error } = await supabase
+    .from("visited_parks")
+    .select("park_id, visited_at")
+    .eq("user_id", user.id);
+
 
     if (error) {
       console.error("Error loading visited parks:", error);
       return;
     }
 
-    // Convert DB rows into your three state formats
     const visitedSet = new Set();
     const visitedObj = {};
     const datesObj = {};
@@ -130,13 +130,10 @@ useEffect(() => {
     data.forEach((row) => {
       visitedSet.add(row.park_id);
       visitedObj[row.park_id] = true;
-      datesObj[row.park_id] = row.visited_date;
+      datesObj[row.park_id] = row.visited_at;
     });
 
-    // For marker icons
     setVisitedParks(visitedSet);
-
-    // For your existing UI logic (modals, filters, dates)
     setVisited(visitedObj);
     setVisitedDates(datesObj);
   }
@@ -153,10 +150,11 @@ useEffect(() => {
   loadParks().then((merged) => {
     setParkData(merged);
 
-    // SAVE THE FULL MERGED DATA SO FUTURE EDITS PERSIST
+    // CRITICAL: Save merged data so visited + features persist
     localStorage.setItem("parkData", JSON.stringify(merged));
   });
 }, []);
+
 
 
 // INSERT THE CLICK HANDLER RIGHT HERE
