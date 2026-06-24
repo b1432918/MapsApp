@@ -16,6 +16,14 @@ async function loadParks() {
   return merged;
 }
 
+// ---------------------------------------------------------
+// LOAD NPS DATA (from /public/data/nps.json)
+// ---------------------------------------------------------
+async function loadNPS() {
+  const response = await fetch("/data/nps.json", { cache: "no-store" });
+  return await response.json();
+}
+
 //////////BLOCK1//////////
 
 import { useEffect, useState } from "react";
@@ -23,6 +31,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { loadVisitedParks, saveVisitedPark, deleteVisitedPark } from "../visitedParks";
 import { useSupabaseAuth } from "../auth";
+
 
 // ---------------------------------------------------------
 // ICONS
@@ -40,6 +49,23 @@ const iconVisited = new L.Icon({
   iconSize: [40, 40],
   iconAnchor: [20, 40],
   popupAnchor: [0, -40]
+});
+
+// ---------------------------------------------------------
+// NPS ICONS
+// ---------------------------------------------------------
+const npsIcon = new L.Icon({
+  iconUrl: "/icons/nps.png",
+  iconSize: [32, 32],
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32]
+});
+
+const npsVisitedIcon = new L.Icon({
+  iconUrl: "/icons/nps-visited.png",
+  iconSize: [32, 32],
+  iconAnchor: [16, 32],
+  popupAnchor: [0, -32]
 });
 
 // ---------------------------------------------------------
@@ -67,6 +93,8 @@ const ALL_FEATURES = [
 export default function MapView() {
   // park data (editable)
   const [parkData, setParkData] = useState({});
+
+  const [nps, setNPS] = useState([]);
 
   // visited boolean
   const [visited, setVisited] = useState(() => {
@@ -175,7 +203,14 @@ useEffect(() => {
   });
 }, []);
 
-
+// ADD THIS
+useEffect(() => {
+  async function loadAllNPS() {
+    const npsUnits = await loadNPS();
+    setNPS(npsUnits);
+  }
+  loadAllNPS();
+}, []);
 
 // INSERT THE CLICK HANDLER RIGHT HERE
 async function handleParkClick(parkId) {
@@ -282,8 +317,6 @@ const confirmUnvisit = async () => {
 };
 
 
-//////////BLOCK3///////////
-
 // ---------------------------------------------------------
   // FEATURE FILTER LOGIC
   // ---------------------------------------------------------
@@ -325,7 +358,7 @@ const confirmUnvisit = async () => {
 // ---------------------------------------------------------
 
 // Apply NPS layer toggle
-const visibleNPS = showNPS ? npsData : [];
+const visibleNPS = showNPS ? nps : [];
 
 // Apply NPS visited filter
 const filteredNPS = visibleNPS.filter((unit) => {
@@ -672,17 +705,13 @@ return (
   <Marker
     key={`nps-${unit.id}`}
     position={[unit.lat, unit.lng]}
-    icon={npsIcon}
+    icon={visitedNPS[unit.id] ? npsVisitedIcon : npsIcon}
     eventHandlers={{
       click: () => setSelectedNPS(unit)
     }}
   />
 ))}
-
-      </MapContainer>
-
-
-      {selectedNPS && (
+{selectedNPS && (
   <Popup
     position={[selectedNPS.lat, selectedNPS.lng]}
     onClose={() => setSelectedNPS(null)}
@@ -691,19 +720,25 @@ return (
       <strong>{selectedNPS.name}</strong>
       <br />
 
-      <button
-        onClick={() =>
-          setVisitedNPS(prev => ({
-            ...prev,
-            [selectedNPS.id]: !prev[selectedNPS.id]
-          }))
-        }
-      >
-        {visitedNPS[selectedNPS.id] ? "Mark Unvisited" : "Mark Visited"}
-      </button>
+      {visitedNPS[selectedNPS.id] ? (
+        <button onClick={() => {
+          setVisitedNPS(prev => ({ ...prev, [selectedNPS.id]: false }));
+        }}>
+          Mark as Unvisited
+        </button>
+      ) : (
+        <button onClick={() => {
+          setVisitedNPS(prev => ({ ...prev, [selectedNPS.id]: true }));
+        }}>
+          Mark as Visited
+        </button>
+      )}
     </div>
   </Popup>
 )}
+
+      </MapContainer>
+
 
       {/* VISIT DATE MODAL */}
       {visitModalOpen && (
