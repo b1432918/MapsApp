@@ -152,8 +152,12 @@ useEffect(() => {
 useEffect(() => {
   loadParks().then((merged) => {
     setParkData(merged);
+
+    // SAVE THE FULL MERGED DATA SO FUTURE EDITS PERSIST
+    localStorage.setItem("parkData", JSON.stringify(merged));
   });
 }, []);
+
 
 // INSERT THE CLICK HANDLER RIGHT HERE
 async function handleParkClick(parkId) {
