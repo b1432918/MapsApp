@@ -1,0 +1,253 @@
+[
+  {
+    "id": 1,
+    "name": "Everglades National Park",
+    "type": "national_park",
+    "lat": 25.2866,
+    "lng": -80.8987,
+    "features": [
+      "Camping",
+      "Hiking",
+      "Bicycling",
+      "Paddling",
+      "Boat Ramp",
+      "Wildlife Viewing",
+      "Scenic Drive",
+      "Visitor Center",
+      "Off-Road Driving"
+    ]
+  },
+  {
+    "id": 2,
+    "name": "Biscayne National Park",
+    "type": "national_park",
+    "lat": 25.4824,
+    "lng": -80.2083,
+    "features": [
+      "Paddling",
+      "Swimming",
+      "Boat Ramp",
+      "Snorkeling",
+      "Scuba Diving",
+      "Wildlife Viewing",
+      "Visitor Center"
+    ]
+  },
+  {
+    "id": 3,
+    "name": "Dry Tortugas National Park",
+    "type": "national_park",
+    "lat": 24.6285,
+    "lng": -82.8732,
+    "features": [
+      "Beach",
+      "Swimming",
+      "Camping",
+      "Paddling",
+      "Snorkeling",
+      "Historic Site",
+      "Wildlife Viewing",
+      "Visitor Center"
+    ]
+  },
+  {
+    "id": 4,
+    "name": "Big Cypress National Preserve",
+    "type": "national_preserve",
+    "lat": 25.8576,
+    "lng": -81.0812,
+    "features": [
+      "Camping",
+      "Hiking",
+      "Paddling",
+      "Boat Ramp",
+      "Wildlife Viewing",
+      "Scenic Drive",
+      "Off-Road Driving",
+      "Visitor Center"
+    ]
+  },
+  {
+    "id": 5,
+    "name": "Gulf Islands National Seashore",
+    "type": "national_seashore",
+    "lat": 30.3278,
+    "lng": -87.1423,
+    "features": [
+      "Beach",
+      "Swimming",
+      "Camping",
+      "Hiking",
+      "Bicycling",
+      "Wildlife Viewing",
+      "Historic Site"
+    ]
+  },
+  {
+    "id": 6,
+    "name": "Canaveral National Seashore",
+    "type": "national_seashore",
+    "lat": 28.8706,
+    "lng": -80.8160,
+    "features": [
+      "Beach",
+      "Swimming",
+      "Hiking",
+      "Bicycling",
+      "Fishing",
+      "Wildlife Viewing"
+    ]
+  },
+
+  /* ---------------------- */
+  /*  NATIONAL MONUMENTS    */
+  /* ---------------------- */
+
+  {
+    "id": 16,
+    "name": "Castillo de San Marcos National Monument",
+    "type": "national_monument",
+    "lat": 29.8979,
+    "lng": -81.3114,
+    "features": [
+      "Historic Site",
+      "Visitor Center"
+    ]
+  },
+  {
+    "id": 17,
+    "name": "Fort Matanzas National Monument",
+    "type": "national_monument",
+    "lat": 29.7127,
+    "lng": -81.2362,
+    "features": [
+      "Historic Site",
+      "Hiking",
+      "Wildlife Viewing",
+      "Visitor Center"
+    ]
+  },
+
+  /* ---------------------- */
+  /* NATIONAL WILDLIFE REFUGES */
+  /* ---------------------- */
+
+  {
+    "id": 7,
+    "name": "Merritt Island National Wildlife Refuge",
+    "type": "national_wildlife_refuge",
+    "lat": 28.6410,
+    "lng": -80.7490,
+    "features": [
+      "Hiking",
+      "Bicycling",
+      "Paddling",
+      "Wildlife Viewing",
+      "Scenic Drive",
+      "Fishing"
+    ]
+  },
+  {
+    "id": 8,
+    "name": "J.N. Ding Darling National Wildlife Refuge",
+    "type": "national_wildlife_refuge",
+    "lat": 26.4391,
+    "lng": -82.1110,
+    "features": [
+      "Hiking",
+      "Bicycling",
+      "Paddling",
+      "Wildlife Viewing",
+      "Scenic Drive",
+      "Fishing"
+    ]
+  },
+  {
+    "id": 9,
+    "name": "St. Marks National Wildlife Refuge",
+    "type": "national_wildlife_refuge",
+    "lat": 30.1510,
+    "lng": -84.1450,
+    "features": [
+      "Hiking",
+      "Bicycling",
+      "Wildlife Viewing",
+      "Fishing",
+      "Historic Site"
+    ]
+  },
+  {
+    "id": 10,
+    "name": "Lower Suwannee National Wildlife Refuge",
+    "type": "national_wildlife_refuge",
+    "lat": 29.2730,
+    "lng": -83.1130,
+    "features": [
+      "Hiking",
+      "Paddling",
+      "Wildlife Viewing",
+      "Fishing",
+      "Scenic Drive"
+    ]
+  },
+  {
+    "id": 11,
+    "name": "Ten Thousand Islands National Wildlife Refuge",
+    "type": "national_wildlife_refuge",
+    "lat": 25.8570,
+    "lng": -81.4380,
+    "features": [
+      "Paddling",
+      "Fishing",
+      "Wildlife Viewing",
+      "Boat Ramp"
+    ]
+  },
+  {
+    "id": 12,
+    "name": "Hobe Sound National Wildlife Refuge",
+    "type": "national_wildlife_refuge",
+    "lat": 27.0590,
+    "lng": -80.1030,
+    "features": [
+      "Beach",
+      "Hiking",
+      "Wildlife Viewing"
+    ]
+  },
+  {
+    "id": 13,
+    "name": "Florida Panther National Wildlife Refuge",
+    "type": "national_wildlife_refuge",
+    "lat": 26.1230,
+    "lng": -81.4390,
+    "features": [
+      "Hiking",
+      "Wildlife Viewing"
+    ]
+  },
+  {
+    "id": 14,
+    "name": "Crystal River National Wildlife Refuge",
+    "type": "national_wildlife_refuge",
+    "lat": 28.9010,
+    "lng": -82.5920,
+    "features": [
+      "Paddling",
+      "Swimming",
+      "Wildlife Viewing",
+      "Fishing"
+    ]
+  },
+  {
+    "id": 15,
+    "name": "Pelican Island National Wildlife Refuge",
+    "type": "national_wildlife_refuge",
+    "lat": 27.8060,
+    "lng": -80.4360,
+    "features": [
+      "Hiking",
+      "Wildlife Viewing"
+    ]
+  }
+]

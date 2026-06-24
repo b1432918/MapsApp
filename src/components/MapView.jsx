@@ -87,6 +87,26 @@ export default function MapView() {
   const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [featuresOpen, setFeaturesOpen] = useState(false);
 
+  // -----------------------------------------
+  // ADD YOUR NPS STATE RIGHT HERE
+  // -----------------------------------------
+
+  // NPS layer toggle
+  const [showNPS, setShowNPS] = useState(true);
+
+  // NPS visited tracking
+  const [visitedNPS, setVisitedNPS] = useState({});
+
+  // NPS visited filter
+  const [npsVisitedFilter, setNpsVisitedFilter] = useState("all");
+
+  // NPS selected unit (for popup)
+  const [selectedNPS, setSelectedNPS] = useState(null);
+
+  // -----------------------------------------
+  // YOUR EXISTING MODALS GO BELOW THIS
+  // -----------------------------------------
+  
   // modals
   const [visitModalOpen, setVisitModalOpen] = useState(false);
   const [visitModalParkId, setVisitModalParkId] = useState(null);
@@ -299,6 +319,21 @@ const confirmUnvisit = async () => {
 
     return visitedMatch && featureMatch;
   });
+
+// ---------------------------------------------------------
+//  ADD NPS FILTERING LOGIC HERE
+// ---------------------------------------------------------
+
+// Apply NPS layer toggle
+const visibleNPS = showNPS ? npsData : [];
+
+// Apply NPS visited filter
+const filteredNPS = visibleNPS.filter((unit) => {
+  if (npsVisitedFilter === "visited") return visitedNPS[unit.id];
+  if (npsVisitedFilter === "not") return !visitedNPS[unit.id];
+  return true;
+});
+
 // ---------------------------------------------------------
 // VISIT / UNVISIT MODAL OPENERS
 // ---------------------------------------------------------
@@ -369,92 +404,150 @@ function deleteSelectedFeatures() {
 }
 
 
-  // ---------------------------------------------------------
-  // RENDER
-  // ---------------------------------------------------------
+// ---------------------------------------------------------
+// RENDER
+// ---------------------------------------------------------
 
-  return (
-    <div style={{ height: "100vh", width: "100vw" }}>
+return (
+  <div style={{ height: "100vh", width: "100vw" }}>
 
-      {/* RIGHT-SIDE FILTER PANEL */}
-      <div style={{
-        position: "absolute",
-        zIndex: 1000,
-        top: 10,
-        right: 10,
-        background: "white",
-        padding: "8px 12px",
-        borderRadius: "8px",
-        boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
-        maxHeight: "90vh",
-        overflowY: "auto"
-      }}>
+    {/* RIGHT-SIDE FILTER PANEL */}
+    <div style={{
+      position: "absolute",
+      zIndex: 1000,
+      top: 10,
+      right: 10,
+      background: "white",
+      padding: "8px 12px",
+      borderRadius: "8px",
+      boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
+      maxHeight: "90vh",
+      overflowY: "auto"
+    }}>
 
-        {/* VISITED FILTER */}
-        <div style={{ display: "flex", gap: "8px", marginBottom: "8px" }}>
-          <button
-            onClick={() => setFilter("all")}
-            style={{
-              padding: "6px 10px",
-              background: filter === "all" ? "#0078ff" : "#e6e6e6",
-              color: filter === "all" ? "white" : "black",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer"
-            }}
-          >
-            All
-          </button>
+      {/* LEGEND */}
+      <div
+        style={{
+          background: "white",
+          padding: "10px",
+          borderRadius: "6px",
+          boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
+          marginBottom: "12px",
+          fontSize: "14px"
+        }}
+      >
+        <div style={{ fontWeight: "bold", marginBottom: "8px" }}>Legend</div>
 
-          <button
-            onClick={() => setFilter("visited")}
-            style={{
-              padding: "6px 10px",
-              background: filter === "visited" ? "#c49a6c" : "#e6e6e6",
-              color: filter === "visited" ? "white" : "black",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer"
-            }}
-          >
-            Visited
-          </button>
-
-          <button
-            onClick={() => setFilter("not")}
-            style={{
-              padding: "6px 10px",
-              background: filter === "not" ? "#0078ff" : "#e6e6e6",
-              color: filter === "not" ? "white" : "black",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "pointer"
-            }}
-          >
-            Not Visited
-          </button>
+        {/* PARK (UNVISITED) */}
+        <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
+          <img
+            src="/icons/park.png"
+            alt="Park Icon"
+            style={{ width: "20px", height: "20px", marginRight: "6px" }}
+          />
+          <span>Park (Unvisited)</span>
         </div>
 
-        {/*BLOCK4*/}
-
-        {/* TRAILS COMING SOON BUTTON */}
-        <div style={{ marginBottom: "12px" }}>
-          <button
-            disabled
-            style={{
-              padding: "6px 10px",
-              background: "#ddd",
-              color: "#666",
-              border: "none",
-              borderRadius: "4px",
-              cursor: "not-allowed",
-              width: "100%",
-              fontStyle: "italic"
-            }}
-          >
-            Trails Coming Soon
-          </button>
+        {/* PARK (VISITED) */}
+        <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
+          <img
+            src="/icons/park-visited.png"
+            alt="Park Visited Icon"
+            style={{ width: "20px", height: "20px", marginRight: "6px" }}
+          />
+          <span>Park (Visited)</span>
         </div>
+
+        {/* NPS (UNVISITED) */}
+        <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
+          <img
+            src="/icons/nps.png"
+            alt="NPS Icon"
+            style={{ width: "20px", height: "20px", marginRight: "6px" }}
+          />
+          <span>NPS Area</span>
+        </div>
+
+        {/* NPS (VISITED) */}
+        <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
+          <img
+            src="/icons/nps-visited.png"
+            alt="NPS Visited Icon"
+            style={{ width: "20px", height: "20px", marginRight: "6px" }}
+          />
+          <span>NPS (Visited)</span>
+        </div>
+
+        {/* TRAILS COMING SOON */}
+        <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
+          <span style={{ fontStyle: "italic", color: "#666" }}>Trails Coming Soon</span>
+        </div>
+      </div>
+
+      {/* VISITED FILTER */}
+      <div style={{ display: "flex", gap: "8px", marginBottom: "8px" }}>
+        <button
+          onClick={() => setFilter("all")}
+          style={{
+            padding: "6px 10px",
+            background: filter === "all" ? "#0078ff" : "#e6e6e6",
+            color: filter === "all" ? "white" : "black",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer"
+          }}
+        >
+          All
+        </button>
+
+        <button
+          onClick={() => setFilter("visited")}
+          style={{
+            padding: "6px 10px",
+            background: filter === "visited" ? "#c49a6c" : "#e6e6e6",
+            color: filter === "visited" ? "white" : "black",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer"
+          }}
+        >
+          Visited
+        </button>
+
+        <button
+          onClick={() => setFilter("not")}
+          style={{
+            padding: "6px 10px",
+            background: filter === "not" ? "#0078ff" : "#e6e6e6",
+            color: filter === "not" ? "white" : "black",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "pointer"
+          }}
+        >
+          Not Visited
+        </button>
+      </div>
+
+      {/* TRAILS COMING SOON BUTTON */}
+      <div style={{ marginBottom: "12px" }}>
+        <button
+          disabled
+          style={{
+            padding: "6px 10px",
+            background: "#ddd",
+            color: "#666",
+            border: "none",
+            borderRadius: "4px",
+            cursor: "not-allowed",
+            width: "100%",
+            fontStyle: "italic"
+          }}
+        >
+          Trails Coming Soon
+        </button>
+      </div>
+
 
         {/* FEATURES COLLAPSIBLE */}
         <div>
@@ -573,7 +666,44 @@ function deleteSelectedFeatures() {
             </Popup>
           </Marker>
         ))}
+
+{/*  NPS MARKERS GO HERE  */}
+{filteredNPS.map((unit) => (
+  <Marker
+    key={`nps-${unit.id}`}
+    position={[unit.lat, unit.lng]}
+    icon={npsIcon}
+    eventHandlers={{
+      click: () => setSelectedNPS(unit)
+    }}
+  />
+))}
+
       </MapContainer>
+
+
+      {selectedNPS && (
+  <Popup
+    position={[selectedNPS.lat, selectedNPS.lng]}
+    onClose={() => setSelectedNPS(null)}
+  >
+    <div>
+      <strong>{selectedNPS.name}</strong>
+      <br />
+
+      <button
+        onClick={() =>
+          setVisitedNPS(prev => ({
+            ...prev,
+            [selectedNPS.id]: !prev[selectedNPS.id]
+          }))
+        }
+      >
+        {visitedNPS[selectedNPS.id] ? "Mark Unvisited" : "Mark Visited"}
+      </button>
+    </div>
+  </Popup>
+)}
 
       {/* VISIT DATE MODAL */}
       {visitModalOpen && (
