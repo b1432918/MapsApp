@@ -458,64 +458,6 @@ return (
       overflowY: "auto"
     }}>
 
-      {/* LEGEND */}
-      <div
-        style={{
-          background: "white",
-          padding: "10px",
-          borderRadius: "6px",
-          boxShadow: "0 2px 6px rgba(0,0,0,0.15)",
-          marginBottom: "12px",
-          fontSize: "14px"
-        }}
-      >
-        <div style={{ fontWeight: "bold", marginBottom: "8px" }}>Legend</div>
-
-        {/* PARK (UNVISITED) */}
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
-          <img
-            src="/icons/park.png"
-            alt="Park Icon"
-            style={{ width: "20px", height: "20px", marginRight: "6px" }}
-          />
-          <span>Park (Unvisited)</span>
-        </div>
-
-        {/* PARK (VISITED) */}
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
-          <img
-            src="/icons/park-visited.png"
-            alt="Park Visited Icon"
-            style={{ width: "20px", height: "20px", marginRight: "6px" }}
-          />
-          <span>Park (Visited)</span>
-        </div>
-
-        {/* NPS (UNVISITED) */}
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
-          <img
-            src="/icons/nps.png"
-            alt="NPS Icon"
-            style={{ width: "20px", height: "20px", marginRight: "6px" }}
-          />
-          <span>NPS Area</span>
-        </div>
-
-        {/* NPS (VISITED) */}
-        <div style={{ display: "flex", alignItems: "center", marginBottom: "6px" }}>
-          <img
-            src="/icons/nps-visited.png"
-            alt="NPS Visited Icon"
-            style={{ width: "20px", height: "20px", marginRight: "6px" }}
-          />
-          <span>NPS (Visited)</span>
-        </div>
-
-        {/* TRAILS COMING SOON */}
-        <div style={{ display: "flex", alignItems: "center", marginTop: "10px" }}>
-          <span style={{ fontStyle: "italic", color: "#666" }}>Trails Coming Soon</span>
-        </div>
-      </div>
 
       {/* VISITED FILTER */}
       <div style={{ display: "flex", gap: "8px", marginBottom: "8px" }}>
@@ -561,6 +503,23 @@ return (
           Not Visited
         </button>
       </div>
+{/* NPS TOGGLE BUTTON */}
+<div style={{ marginBottom: "12px" }}>
+  <button
+    onClick={() => setShowNPS(prev => !prev)}
+    style={{
+      padding: "6px 10px",
+      background: showNPS ? "#0078ff" : "#e6e6e6",
+      color: showNPS ? "white" : "black",
+      border: "none",
+      borderRadius: "4px",
+      cursor: "pointer",
+      width: "100%"
+    }}
+  >
+    {showNPS ? "Hide NPS" : "Show NPS"}
+  </button>
+</div>
 
       {/* TRAILS COMING SOON BUTTON */}
       <div style={{ marginBottom: "12px" }}>
