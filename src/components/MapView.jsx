@@ -213,7 +213,13 @@ const confirmVisit = async () => {
   setVisitedDates(prev => ({ ...prev, [id]: visitModalDate }));
   setVisitedParks(prev => new Set([...prev, id]));
 
-  // FIXED: include supabase client
+  // DIAGNOSTICS
+  console.log("supabase:", supabase);
+  console.log("user.id:", user.id);
+  console.log("visitModalParkId:", visitModalParkId);
+  console.log("visitModalDate:", visitModalDate);
+
+  // Supabase write
   await saveVisitedPark(supabase, user.id, id, visitModalDate);
 
   // Close modal
