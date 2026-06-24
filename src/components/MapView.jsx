@@ -56,16 +56,16 @@ const iconVisited = new L.Icon({
 // ---------------------------------------------------------
 const npsIcon = new L.Icon({
   iconUrl: "/icons/nps.png",
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32]
+  iconSize: [20, 20],
+  iconAnchor: [10, 20],
+  popupAnchor: [0, -20]
 });
 
 const npsVisitedIcon = new L.Icon({
   iconUrl: "/icons/nps-visited.png",
-  iconSize: [32, 32],
-  iconAnchor: [16, 32],
-  popupAnchor: [0, -32]
+  iconSize: [20, 20],
+  iconAnchor: [10, 20],
+  popupAnchor: [0, -20]
 });
 
 // ---------------------------------------------------------
