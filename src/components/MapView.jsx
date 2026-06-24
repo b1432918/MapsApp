@@ -1,4 +1,3 @@
-//////////BLOCK0//////////
 // MERGED LOAD LOGIC (NEW)
 // ---------------------------------------------------------
 
@@ -292,6 +291,75 @@ const confirmUnvisit = async () => {
 
     return visitedMatch && featureMatch;
   });
+// ---------------------------------------------------------
+// VISIT / UNVISIT MODAL OPENERS
+// ---------------------------------------------------------
+
+function requestVisitDate(parkId) {
+  setVisitModalParkId(parkId);
+  setVisitModalDate("");
+  setVisitModalOpen(true);
+}
+
+function requestUnvisitConfirmation1(parkId) {
+  setUnvisitModalParkId(parkId);
+  setUnvisitModalOpen1(true);
+}
+
+function proceedToSecondUnvisitModal() {
+  setUnvisitModalOpen1(false);
+  setUnvisitModalOpen2(true);
+}
+
+// ---------------------------------------------------------
+// FEATURE ADDING
+// ---------------------------------------------------------
+
+function addFeature(parkId, feature) {
+  if (!feature.trim()) return;
+
+  setParkData(prev => {
+    const updated = { ...prev };
+    const park = updated[parkId];
+
+    if (!park.features.includes(feature)) {
+      park.features = [...park.features, feature];
+    }
+
+    // SAVE UPDATED DATA HERE
+    localStorage.setItem("parkData", JSON.stringify(updated));
+
+    return updated;
+  });
+}
+
+
+// ---------------------------------------------------------
+// FEATURE DELETION
+// ---------------------------------------------------------
+
+function deleteSelectedFeatures() {
+  const parkId = featureDeleteParkId;
+
+  setParkData(prev => {
+    const updated = { ...prev };
+    const park = updated[parkId];
+
+    park.features = park.features.filter(
+      f => !featureDeleteSelection.includes(f)
+    );
+
+    // SAVE UPDATED DATA HERE
+    localStorage.setItem("parkData", JSON.stringify(updated));
+
+    return updated;
+  });
+
+  setFeatureDeleteConfirmModal(false);
+  setFeatureDeleteModal(false);
+  setFeatureDeleteSelection([]);
+}
+
 
   // ---------------------------------------------------------
   // RENDER
