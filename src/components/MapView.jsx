@@ -626,18 +626,21 @@ return (
                 <br />
 
                 {/* VISITED BUTTONS */}
-                {visitedParks[p.id] ? (
-                  <>
-                    <div>Visited on: {visitedParkDates[p.id]}</div>
-                    <button onClick={() => requestUnvisitConfirmation1(p.id)}>
-                      Mark as Unvisited
-                    </button>
-                  </>
-                ) : (
-                  <button onClick={() => requestVisitDate(p.id)}>
-                    Mark as Visited
+               
+
+               {visitedParks[p.id] ? (
+                <>
+                  <div>Visited on: {visitedParkDates[p.id]}</div>
+                  <button onClick={() => handleUnvisit(p.id)}>
+                    Mark as Unvisited
                   </button>
-                )}
+                </>
+              ) : (
+                <button onClick={() => handleParkClick(p.id)}>
+                  Mark as Visited
+                </button>
+              )}
+
 
                 <hr />
 
