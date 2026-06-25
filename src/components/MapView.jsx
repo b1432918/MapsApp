@@ -542,7 +542,7 @@ return (
       width: "100%"
     }}
   >
-    {showNPS ? "Hide NPS" : "Show NPS"}
+    {showNPS ? "NPS On" : "NPS Off"}
   </button>
 </div>
 
