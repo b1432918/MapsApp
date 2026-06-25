@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useSupabaseAuth } from "../supabase/AuthContext";
+import { supabase } from "../supabase";   // ← FIXED
 
 export default function useTrails() {
   const { supabase, user } = useSupabaseAuth();

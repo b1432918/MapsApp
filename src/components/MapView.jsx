@@ -71,16 +71,16 @@ const npsVisitedIcon = new L.Icon({
 
 const trailIcon = new L.Icon({
   iconUrl: "/icons/trailhead.png",
-  iconSize: [15, 15],
-  iconAnchor: [7, 15],
-  popupAnchor: [0, -12]
+  iconSize: [20, 20],
+  iconAnchor: [10, 20],
+  popupAnchor: [0, -20]
 });
 
 const trailVisitedIcon = new L.Icon({
   iconUrl: "/icons/trailhead-visited.png",
-  iconSize: [15, 15],
-  iconAnchor: [7, 15],
-  popupAnchor: [0, -12]
+  iconSize: [20, 20],
+  iconAnchor: [10, 20],
+  popupAnchor: [0, -20]
 });
 
 
