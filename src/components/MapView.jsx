@@ -24,7 +24,6 @@ async function loadNPS() {
   return await response.json();
 }
 
-//////////BLOCK1//////////
 
 import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -97,18 +96,11 @@ export default function MapView() {
 
   const [nps, setNPS] = useState([]);
 
-  // visited boolean
-const [visitedParks, setVisitedParks] = useState(() => {
-  const saved = localStorage.getItem("visitedParks");
-  return saved ? JSON.parse(saved) : {};
-});
-
-// visited date storage
-const [visitedParkDates, setVisitedParkDates] = useState(() => {
-  const saved = localStorage.getItem("visitedParkDates");
-  return saved ? JSON.parse(saved) : {};
-});
-
+  // ---------------------------------------------------------
+  // VISITED PARKS — Supabase ONLY (no localStorage)
+  // ---------------------------------------------------------
+  const [visitedParks, setVisitedParks] = useState({});          // ✅ CHANGED
+  const [visitedParkDates, setVisitedParkDates] = useState({});  // ✅ CHANGED
 
   // visited filter
   const [filter, setFilter] = useState("all");
@@ -118,26 +110,21 @@ const [visitedParkDates, setVisitedParkDates] = useState(() => {
   const [featuresOpen, setFeaturesOpen] = useState(false);
 
   // -----------------------------------------
-  // ADD YOUR NPS STATE RIGHT HERE
+  // NPS STATE
   // -----------------------------------------
 
-  // NPS layer toggle
   const [showNPS, setShowNPS] = useState(true);
 
-  // NPS visited tracking
   const [visitedNPS, setVisitedNPS] = useState({});
 
-  // NPS visited filter
   const [npsVisitedFilter, setNpsVisitedFilter] = useState("all");
 
-  // NPS selected unit (for popup)
   const [selectedNPS, setSelectedNPS] = useState(null);
 
   // -----------------------------------------
-  // YOUR EXISTING MODALS GO BELOW THIS
+  // MODALS
   // -----------------------------------------
-  
-  // modals
+
   const [visitModalOpen, setVisitModalOpen] = useState(false);
   const [visitModalParkId, setVisitModalParkId] = useState(null);
   const [visitModalDate, setVisitModalDate] = useState("");
@@ -146,16 +133,15 @@ const [visitedParkDates, setVisitedParkDates] = useState(() => {
   const [unvisitModalOpen2, setUnvisitModalOpen2] = useState(false);
   const [unvisitModalParkId, setUnvisitModalParkId] = useState(null);
 
-  // NEW: feature deletion modals
+  // feature deletion modals
   const [featureDeleteModal, setFeatureDeleteModal] = useState(false);
   const [featureDeleteConfirmModal, setFeatureDeleteConfirmModal] = useState(false);
   const [featureDeleteParkId, setFeatureDeleteParkId] = useState(null);
   const [featureDeleteSelection, setFeatureDeleteSelection] = useState([]);
 
-  // NEW: Supabase cloud‑synced visited parks
-  const [visitedParks, setVisitedParks] = useState(new Set());
+  // ❌ REMOVED — this was the duplicate that broke your build
 
-  const { user, supabase } = useSupabaseAuth();   //  MUST come before any function that uses `user`
+  const { user, supabase } = useSupabaseAuth();
 
 // ---------------------------------------------------------
 // LOAD VISITED PARKS FROM SUPABASE ON LOGIN  ✅ FIXED
@@ -379,17 +365,18 @@ const confirmUnvisit = async () => {
   // ---------------------------------------------------------
 
   const filteredParks = Object.values(parkData).filter((p) => {
-    const visitedMatch =
-      filter === "visited"
-        ? visited[p.id]
-        : filter === "not"
-        ? !visited[p.id]
-        : true;
+  const visitedMatch =
+    filter === "visited"
+      ? visitedParks[p.id]          // ✅ FIXED
+      : filter === "not"
+      ? !visitedParks[p.id]         // ✅ FIXED
+      : true;
 
-    const featureMatch = parkMatchesFeatures(p);
+  const featureMatch = parkMatchesFeatures(p);
 
-    return visitedMatch && featureMatch;
-  });
+  return visitedMatch && featureMatch;
+});
+
 
 // ---------------------------------------------------------
 //  ADD NPS FILTERING LOGIC HERE
