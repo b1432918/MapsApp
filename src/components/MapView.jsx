@@ -31,7 +31,7 @@ import L from "leaflet";
 import { loadVisitedParks, saveVisitedPark, deleteVisitedPark } from "../visitedParks";
 import { useSupabaseAuth } from "../auth";
 import { saveVisitedNPS, deleteVisitedNPS } from "../visitedNPS";
-
+import useTrails from "./useTrails";
 
 // ---------------------------------------------------------
 // ICONS
@@ -67,6 +67,22 @@ const npsVisitedIcon = new L.Icon({
   iconAnchor: [10, 20],
   popupAnchor: [0, -20]
 });
+
+
+const trailIcon = new L.Icon({
+  iconUrl: "/icons/trailhead.png",
+  iconSize: [15, 15],
+  iconAnchor: [7, 15],
+  popupAnchor: [0, -12]
+});
+
+const trailVisitedIcon = new L.Icon({
+  iconUrl: "/icons/trailhead-visited.png",
+  iconSize: [15, 15],
+  iconAnchor: [7, 15],
+  popupAnchor: [0, -12]
+});
+
 
 // ---------------------------------------------------------
 // FEATURES LIST
@@ -108,6 +124,18 @@ export default function MapView() {
   // features filter
   const [selectedFeatures, setSelectedFeatures] = useState([]);
   const [featuresOpen, setFeaturesOpen] = useState(false);
+
+  // -----------------------------------------
+// TRAILS STATE (NEW)
+// -----------------------------------------
+const {
+  trails,
+  visitedTrails,
+  toggleVisited,
+  showTrails,
+  setShowTrails
+} = useTrails();
+
 
   // -----------------------------------------
   // NPS STATE
@@ -546,24 +574,23 @@ return (
   </button>
 </div>
 
-      {/* TRAILS COMING SOON BUTTON */}
-      <div style={{ marginBottom: "12px" }}>
-        <button
-          disabled
-          style={{
-            padding: "6px 10px",
-            background: "#ddd",
-            color: "#666",
-            border: "none",
-            borderRadius: "4px",
-            cursor: "not-allowed",
-            width: "100%",
-            fontStyle: "italic"
-          }}
-        >
-          Trails Coming Soon
-        </button>
-      </div>
+{/* TRAILS TOGGLE BUTTON */}
+<div style={{ marginBottom: "12px" }}>
+  <button
+    onClick={() => setShowTrails(prev => !prev)}
+    style={{
+      padding: "6px 10px",
+      background: showTrails ? "#0078ff" : "#e6e6e6",
+      color: showTrails ? "white" : "black",
+      border: "none",
+      borderRadius: "4px",
+      cursor: "pointer",
+      width: "100%"
+    }}
+  >
+    {showTrails ? "Trails On" : "Trails Off"}
+  </button>
+</div>
 
 
         {/* FEATURES COLLAPSIBLE */}
@@ -745,6 +772,62 @@ return (
     </div>
   </Popup>
 )}
+
+{/* --- TRAIL MARKERS --- */}
+{showTrails &&
+  trails.map((trail) =>
+    trail.trailheads.map((th) => {
+      const isVisited = visitedTrails.includes(trail.id);
+
+      return (
+        <Marker
+          key={`trail-${trail.id}-${th.name}`}
+          position={[th.lat, th.lng]}
+          icon={isVisited ? trailVisitedIcon : trailIcon}
+        >
+          <Popup>
+            <div>
+              <strong>{trail.name}</strong>
+
+              <div><strong>Type:</strong> {trail.type}</div>
+              <div><strong>Length:</strong> {trail.length_miles} miles</div>
+
+              <div style={{ marginTop: "8px" }}>
+                <strong>Features:</strong>
+                {trail.features.map((f) => (
+                  <div key={f}>• {f}</div>
+                ))}
+              </div>
+
+              <div style={{ marginTop: "8px" }}>
+                <strong>Trailheads:</strong>
+                {trail.trailheads.map((h) => (
+                  <div key={h.name}>• {h.name}</div>
+                ))}
+              </div>
+
+              <button
+                onClick={() => toggleVisited(trail.id)}
+                style={{
+                  marginTop: "10px",
+                  padding: "6px 10px",
+                  background: isVisited ? "#d9534f" : "#5cb85c",
+                  color: "white",
+                  border: "none",
+                  borderRadius: "4px",
+                  cursor: "pointer"
+                }}
+              >
+                {isVisited ? "Mark Unvisited" : "Mark Visited"}
+              </button>
+            </div>
+          </Popup>
+        </Marker>
+      );
+    })
+  )
+}
+
 </MapContainer>   {/* THIS WAS MISSING — REQUIRED */}
 
       {/* FEATURE DELETE MODAL */}
@@ -821,8 +904,6 @@ return (
     </div>
   );
 }
-
-//////////BLOCK6//////////
 
 // ---------------------------------------------------------
 // SHARED STYLES
