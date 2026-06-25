@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../supabase";
+import { useSupabaseAuth } from "../supabase/AuthContext";
 
 export default function useTrails() {
+  const { supabase, user } = useSupabaseAuth();
+
   const [trails, setTrails] = useState([]);
   const [visitedTrails, setVisitedTrails] = useState([]);
   const [showTrails, setShowTrails] = useState(true);
@@ -16,26 +18,51 @@ export default function useTrails() {
   // Load visited trails from Supabase
   useEffect(() => {
     async function loadVisited() {
+      if (!user) {
+        setVisitedTrails([]);
+        return;
+      }
+
       const { data, error } = await supabase
         .from("visited_trails")
-        .select("trail_id");
+        .select("trail_id")
+        .eq("user_id", user.id);
 
       if (!error && data) {
         setVisitedTrails(data.map((row) => row.trail_id));
       }
     }
+
     loadVisited();
-  }, []);
+  }, [user]);
 
   // Toggle visited/unvisited
   async function toggleVisited(trailId) {
+    if (!user) return;
+
     const isVisited = visitedTrails.includes(trailId);
 
     if (isVisited) {
-      await supabase.from("visited_trails").delete().eq("trail_id", trailId);
+      // Delete from Supabase
+      await supabase
+        .from("visited_trails")
+        .delete()
+        .eq("user_id", user.id)
+        .eq("trail_id", trailId);
+
+      // Update UI
       setVisitedTrails((prev) => prev.filter((id) => id !== trailId));
     } else {
-      await supabase.from("visited_trails").insert({ trail_id: trailId });
+      const today = new Date().toISOString();
+
+      // Save to Supabase
+      await supabase.from("visited_trails").insert({
+        user_id: user.id,
+        trail_id: trailId,
+        visited_at: today
+      });
+
+      // Update UI
       setVisitedTrails((prev) => [...prev, trailId]);
     }
   }
