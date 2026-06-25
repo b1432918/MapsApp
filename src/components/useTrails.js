@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { supabase } from "../supabase";
 
+
 export default function useTrails(user) {
   const [trails, setTrails] = useState([]);
   const [visitedTrails, setVisitedTrails] = useState(new Set());
