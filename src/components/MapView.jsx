@@ -157,39 +157,45 @@ const [visitedParkDates, setVisitedParkDates] = useState(() => {
 
   const { user, supabase } = useSupabaseAuth();   //  MUST come before any function that uses `user`
 
-// NEW: Load visited parks from Supabase
+// ---------------------------------------------------------
+// LOAD VISITED PARKS FROM SUPABASE ON LOGIN  ✅ FIXED
+// ---------------------------------------------------------
 useEffect(() => {
   async function init() {
-    if (!user) return;
+    if (!user) {
+      // User logged out → clear UI state
+      setVisitedParks({});                 // ✅ CHANGED
+      setVisitedParkDates({});             // ✅ CHANGED
+      return;
+    }
 
-  const { data, error } = await supabase
-    .from("visited_parks")
-    .select("park_id, visited_at")
-    .eq("user_id", user.id);
-
+    const { data, error } = await supabase
+      .from("visited_parks")
+      .select("park_id, visited_at")       // stays the same
+      .eq("user_id", user.id);
 
     if (error) {
       console.error("Error loading visited parks:", error);
       return;
     }
 
-    const visitedSet = new Set();
-    const visitedObj = {};
-    const datesObj = {};
+    // Build correct UI state objects
+    const parksObj = {};                   // ✅ CHANGED (correct state)
+    const datesObj = {};                   // ✅ CHANGED (correct state)
 
     data.forEach((row) => {
-      visitedSet.add(row.park_id);
-      visitedObj[row.park_id] = true;
-      datesObj[row.park_id] = row.visited_at;
+      parksObj[row.park_id] = true;        // ✅ CHANGED
+      datesObj[row.park_id] = row.visited_at; // ✅ CHANGED
     });
 
-    setVisitedParks(visitedSet);
-    setVisited(visitedObj);
-    setVisitedDates(datesObj);
+    // Update UI state
+    setVisitedParks(parksObj);             // ✅ CHANGED
+    setVisitedParkDates(datesObj);         // ✅ CHANGED
   }
 
   init();
 }, [user]);
+
 
 // NEW: Load visited NPS from Supabase
 useEffect(() => {
@@ -295,7 +301,7 @@ async function handleUnvisit(parkId) {
 }
 
 // ---------------------------------------------------------
-// FIXED: CONFIRM VISIT (MODAL)
+// CONFIRM VISIT (MODAL)  ✅ FIXED
 // ---------------------------------------------------------
 const confirmVisit = async () => {
   if (!visitModalDate) return;
@@ -303,11 +309,17 @@ const confirmVisit = async () => {
   const id = visitModalParkId;
 
   // Update UI immediately
-  setVisited(prev => ({ ...prev, [id]: true }));
-  setVisitedDates(prev => ({ ...prev, [id]: visitModalDate }));
-  setVisitedParks(prev => new Set([...prev, id]));
+  setVisitedParks(prev => ({                 // ✅ CHANGED
+    ...prev,
+    [id]: true
+  }));
 
-  // Supabase write (STATE PARKS ONLY)
+  setVisitedParkDates(prev => ({             // ✅ CHANGED
+    ...prev,
+    [id]: visitModalDate
+  }));
+
+  // Supabase write
   await saveVisitedPark(supabase, user.id, id, visitModalDate);
 
   // Close modal
@@ -317,38 +329,31 @@ const confirmVisit = async () => {
 };
 
 // ---------------------------------------------------------
-// FIXED: CONFIRM UNVISIT (MODAL)
+// CONFIRM UNVISIT (MODAL)  ✅ FIXED
 // ---------------------------------------------------------
 const confirmUnvisit = async () => {
   const id = unvisitModalParkId;
 
   // Update UI immediately
-  setVisited(prev => {
+  setVisitedParks(prev => {                  // ✅ CHANGED
     const updated = { ...prev };
     delete updated[id];
     return updated;
   });
 
-  setVisitedDates(prev => {
+  setVisitedParkDates(prev => {              // ✅ CHANGED
     const updated = { ...prev };
     delete updated[id];
     return updated;
   });
 
-  setVisitedParks(prev => {
-    const updated = new Set(prev);
-    updated.delete(id);
-    return updated;
-  });
-
-  // Supabase delete (STATE PARKS ONLY)
+  // Supabase delete
   await deleteVisitedPark(supabase, user.id, id);
 
   // Close modal
   setUnvisitModalOpen2(false);
   setUnvisitModalParkId(null);
 };
-
 
 // ---------------------------------------------------------
   // FEATURE FILTER LOGIC
