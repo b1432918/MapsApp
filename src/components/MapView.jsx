@@ -32,6 +32,8 @@ import { loadVisitedParks, saveVisitedPark, deleteVisitedPark } from "../visited
 import { useSupabaseAuth } from "../auth";
 import { saveVisitedNPS, deleteVisitedNPS } from "../visitedNPS";
 import useTrails from "./useTrails";
+import { supabase } from "../supabase";   // ⭐ ADD THIS
+
 
 // ---------------------------------------------------------
 // ICONS
