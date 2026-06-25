@@ -98,16 +98,17 @@ export default function MapView() {
   const [nps, setNPS] = useState([]);
 
   // visited boolean
-  const [visited, setVisited] = useState(() => {
-    const saved = localStorage.getItem("visitedParks");
-    return saved ? JSON.parse(saved) : {};
-  });
+const [visitedParks, setVisitedParks] = useState(() => {
+  const saved = localStorage.getItem("visitedParks");
+  return saved ? JSON.parse(saved) : {};
+});
 
-  // visited date storage
-  const [visitedDates, setVisitedDates] = useState(() => {
-    const saved = localStorage.getItem("visitedDates");
-    return saved ? JSON.parse(saved) : {};
-  });
+// visited date storage
+const [visitedParkDates, setVisitedParkDates] = useState(() => {
+  const saved = localStorage.getItem("visitedParkDates");
+  return saved ? JSON.parse(saved) : {};
+});
+
 
   // visited filter
   const [filter, setFilter] = useState("all");
@@ -239,47 +240,58 @@ useEffect(() => {
   loadAllNPS();
 }, []);
 
-// PARK CLICK HANDLER (STATE PARKS ONLY)
+// ---------------------------------------------------------
+// PARK CLICK HANDLER (STATE PARKS ONLY)  ✅ FIXED
+// ---------------------------------------------------------
 async function handleParkClick(parkId) {
   if (!user) return;
 
-  // Save visit to Supabase with today's date
   const today = new Date().toISOString();
+
+  // Save visit to Supabase with today's date
   await saveVisitedPark(supabase, user.id, parkId, today);
 
-  // Update icon state
-  setVisitedParks(prev => new Set([...prev, parkId]));
+  // Update visited state (object, not Set)
+  setVisitedParks(prev => ({                 // ✅ CHANGED
+    ...prev,
+    [parkId]: true
+  }));
 
-  // Update your existing UI logic
-  setVisited(prev => ({ ...prev, [parkId]: true }));
-  setVisitedDates(prev => ({ ...prev, [parkId]: today }));
+  // Update visited date state
+  setVisitedParkDates(prev => ({             // ✅ CHANGED
+    ...prev,
+    [parkId]: today
+  }));
+
+  // ❌ REMOVED: no localStorage persistence
 }
 
+
+
+// ---------------------------------------------------------
+// UNVISIT A PARK  ✅ FIXED
+// ---------------------------------------------------------
 async function handleUnvisit(parkId) {
   if (!user) return;
 
   // Delete from Supabase
   await deleteVisitedPark(supabase, user.id, parkId);
 
-  // Update icon state
-  setVisitedParks(prev => {
-    const updated = new Set(prev);
-    updated.delete(parkId);
-    return updated;
-  });
-
-  // Update your existing UI logic
-  setVisited(prev => {
+  // Update visited state (object, not Set)
+  setVisitedParks(prev => {                  // ✅ CHANGED
     const updated = { ...prev };
     delete updated[parkId];
     return updated;
   });
 
-  setVisitedDates(prev => {
+  // Update visited date state
+  setVisitedParkDates(prev => {              // ✅ CHANGED
     const updated = { ...prev };
     delete updated[parkId];
     return updated;
   });
+
+  // ❌ REMOVED: no localStorage persistence
 }
 
 // ---------------------------------------------------------
@@ -614,7 +626,7 @@ return (
           <Marker
             key={p.id}
             position={[p.lat, p.lng]}
-            icon={visited[p.id] ? iconVisited : iconDefault}
+            icon={visitedParks[p.id] ? iconVisited : iconDefault}
           >
             <Popup>
               <div>
@@ -622,9 +634,9 @@ return (
                 <br />
 
                 {/* VISITED BUTTONS */}
-                {visited[p.id] ? (
+                {visitedParks[p.id] ? (
                   <>
-                    <div>Visited on: {visitedDates[p.id]}</div>
+                    <div>Visited on: {visitedParkDates[p.id]}</div>
                     <button onClick={() => requestUnvisitConfirmation1(p.id)}>
                       Mark as Unvisited
                     </button>
