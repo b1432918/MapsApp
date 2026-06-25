@@ -738,7 +738,7 @@ return (
     </div>
   </Popup>
 )}
-
+</MapContainer>   {/* THIS WAS MISSING — REQUIRED */}
 
       {/* FEATURE DELETE MODAL */}
       {featureDeleteModal && (
