@@ -170,7 +170,6 @@ const {
 
   // ❌ REMOVED — this was the duplicate that broke your build
 
-  const { user, supabase } = useSupabaseAuth();
 
 // ---------------------------------------------------------
 // LOAD VISITED PARKS FROM SUPABASE ON LOGIN  ✅ FIXED
