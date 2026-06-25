@@ -31,6 +31,7 @@ import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
 import L from "leaflet";
 import { loadVisitedParks, saveVisitedPark, deleteVisitedPark } from "../visitedParks";
 import { useSupabaseAuth } from "../auth";
+import { saveVisitedNPS, deleteVisitedNPS } from "../visitedNPS";
 
 
 // ---------------------------------------------------------
@@ -189,6 +190,32 @@ useEffect(() => {
   init();
 }, [user]);
 
+// NEW: Load visited NPS from Supabase
+useEffect(() => {
+  async function loadVisitedNPS() {
+    if (!user) return;
+
+    const { data, error } = await supabase
+      .from("visited_nps")
+      .select("nps_id, visited, visited_at")
+      .eq("user_id", user.id);
+
+    if (error) {
+      console.error("Error loading visited NPS:", error);
+      return;
+    }
+
+    const obj = {};
+    data.forEach(row => {
+      obj[row.nps_id] = row.visited ? row.visited_at : false;
+    });
+
+    setVisitedNPS(obj);
+  }
+
+  loadVisitedNPS();
+}, [user]);
+
 
 // ---------------------------------------------------------
 // LOAD PARKS (Trails coming soon) — REVISED
@@ -203,7 +230,7 @@ useEffect(() => {
   });
 }, []);
 
-// ADD THIS
+// LOAD ALL NPS UNITS (offline JSON)
 useEffect(() => {
   async function loadAllNPS() {
     const npsUnits = await loadNPS();
@@ -212,7 +239,7 @@ useEffect(() => {
   loadAllNPS();
 }, []);
 
-// INSERT THE CLICK HANDLER RIGHT HERE
+// PARK CLICK HANDLER (STATE PARKS ONLY)
 async function handleParkClick(parkId) {
   if (!user) return;
 
@@ -268,13 +295,7 @@ const confirmVisit = async () => {
   setVisitedDates(prev => ({ ...prev, [id]: visitModalDate }));
   setVisitedParks(prev => new Set([...prev, id]));
 
-  // DIAGNOSTICS
-  console.log("supabase:", supabase);
-  console.log("user.id:", user.id);
-  console.log("visitModalParkId:", visitModalParkId);
-  console.log("visitModalDate:", visitModalDate);
-
-  // Supabase write
+  // Supabase write (STATE PARKS ONLY)
   await saveVisitedPark(supabase, user.id, id, visitModalDate);
 
   // Close modal
@@ -308,7 +329,7 @@ const confirmUnvisit = async () => {
     return updated;
   });
 
-  // FIXED: include supabase client
+  // Supabase delete (STATE PARKS ONLY)
   await deleteVisitedPark(supabase, user.id, id);
 
   // Close modal
@@ -670,6 +691,7 @@ return (
     }}
   />
 ))}
+
 {selectedNPS && (
   <Popup
     position={[selectedNPS.lat, selectedNPS.lng]}
@@ -680,79 +702,42 @@ return (
       <br />
 
       {visitedNPS[selectedNPS.id] ? (
-        <button onClick={() => {
-          setVisitedNPS(prev => ({ ...prev, [selectedNPS.id]: false }));
-        }}>
+        <button
+          onClick={async () => {
+            // UI update
+            setVisitedNPS(prev => {
+              const updated = { ...prev };
+              delete updated[selectedNPS.id];
+              return updated;
+            });
+
+            // Supabase delete
+            await deleteVisitedNPS(supabase, user.id, selectedNPS.id);
+          }}
+        >
           Mark as Unvisited
         </button>
       ) : (
-        <button onClick={() => {
-          setVisitedNPS(prev => ({ ...prev, [selectedNPS.id]: true }));
-        }}>
+        <button
+          onClick={async () => {
+            const today = new Date().toISOString();
+
+            // UI update
+            setVisitedNPS(prev => ({
+              ...prev,
+              [selectedNPS.id]: today
+            }));
+
+            // Supabase save
+            await saveVisitedNPS(supabase, user.id, selectedNPS.id, today);
+          }}
+        >
           Mark as Visited
         </button>
       )}
     </div>
   </Popup>
 )}
-
-      </MapContainer>
-
-
-      {/* VISIT DATE MODAL */}
-      {visitModalOpen && (
-        <div style={modalOverlay}>
-          <div style={modalBox}>
-            <h3>Enter Visit Date</h3>
-            <input
-              type="date"
-              value={visitModalDate}
-              onChange={(e) => setVisitModalDate(e.target.value)}
-              style={inputStyle}
-            />
-            <button onClick={confirmVisit} style={confirmBtn}>Confirm</button>
-            <button onClick={() => setVisitModalOpen(false)} style={cancelBtn}>Cancel</button>
-          </div>
-        </div>
-      )}
-
-      {/* UNVISIT CONFIRMATION #1 */}
-      {unvisitModalOpen1 && (
-        <div style={modalOverlay}>
-          <div style={modalBox}>
-            <h3>Are you sure?</h3>
-            <p>You are about to mark this park as unvisited.</p>
-
-            <button onClick={proceedToSecondUnvisitModal} style={confirmBtn}>
-              Continue
-            </button>
-
-            <button onClick={() => setUnvisitModalOpen1(false)} style={cancelBtn}>
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
-
-      {/* UNVISIT CONFIRMATION #2 */}
-      {unvisitModalOpen2 && (
-        <div style={modalOverlay}>
-          <div style={modalBox}>
-            <h3>Remove Visit Date?</h3>
-            <p>This action cannot be undone.</p>
-
-            <button onClick={confirmUnvisit} style={confirmBtn}>
-              Confirm
-            </button>
-
-            <button onClick={() => setUnvisitModalOpen2(false)} style={cancelBtn}>
-              Cancel
-            </button>
-          </div>
-        </div>
-      )}
-
-
 
 
       {/* FEATURE DELETE MODAL */}
