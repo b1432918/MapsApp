@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
-import { supabase } from "../supabase";   // ← FIXED
+import { supabase } from "../supabase";   // correct import
 
 export default function useTrails() {
-  const { supabase, user } = useSupabaseAuth();
-
   const [trails, setTrails] = useState([]);
   const [visitedTrails, setVisitedTrails] = useState([]);
   const [showTrails, setShowTrails] = useState(true);
+
+  // Get the current user (async)
+  async function getUser() {
+    const { data } = await supabase.auth.getUser();
+    return data?.user || null;
+  }
 
   // Load trails.json
   useEffect(() => {
@@ -18,6 +22,7 @@ export default function useTrails() {
   // Load visited trails from Supabase
   useEffect(() => {
     async function loadVisited() {
+      const user = await getUser();
       if (!user) {
         setVisitedTrails([]);
         return;
@@ -34,10 +39,11 @@ export default function useTrails() {
     }
 
     loadVisited();
-  }, [user]);
+  }, []);
 
   // Toggle visited/unvisited
   async function toggleVisited(trailId) {
+    const user = await getUser();
     if (!user) return;
 
     const isVisited = visitedTrails.includes(trailId);
