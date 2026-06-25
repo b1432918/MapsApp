@@ -40,6 +40,7 @@ export default function useTrails(user) {
 
   // Toggle visited/unvisited
   async function toggleVisited(trailId) {
+    console.log("toggleVisited called for", trailId);
     if (!user) return;
 
     const isVisited = visitedTrails.has(trailId);
