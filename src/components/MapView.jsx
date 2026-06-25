@@ -109,7 +109,6 @@ const ALL_FEATURES = [
 export default function MapView() {
   // park data (editable)
   const [parkData, setParkData] = useState({});
-
   const [nps, setNPS] = useState([]);
 
   // ---------------------------------------------------------
@@ -128,13 +127,15 @@ export default function MapView() {
   // -----------------------------------------
 // TRAILS STATE (NEW)
 // -----------------------------------------
+const { user } = useSupabaseAuth();
+
 const {
   trails,
   visitedTrails,
   toggleVisited,
   showTrails,
   setShowTrails
-} = useTrails();
+} = useTrails(user);
 
 
   // -----------------------------------------
@@ -777,7 +778,7 @@ return (
 {showTrails &&
   trails.map((trail) =>
     trail.trailheads.map((th) => {
-      const isVisited = visitedTrails.includes(trail.id);
+      const isVisited = visitedTrails.has(trail.id);
 
       return (
         <Marker
